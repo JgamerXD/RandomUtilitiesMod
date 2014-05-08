@@ -21,7 +21,7 @@ public class ExampleMod
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-    	multiArrow = new MultiArrow().setUnlocalizedName("multiArrow").setCreativeTab(CreativeTabs.tabMisc);
+    	multiArrow = new MultiArrow().setUnlocalizedName("multiArrow").setCreativeTab(CreativeTabs.tabMisc).setTextureName("randomutilitiesmod:multi_arrow");
     	
     	GameRegistry.registerItem(multiArrow, "multi_Arrow");
     }
