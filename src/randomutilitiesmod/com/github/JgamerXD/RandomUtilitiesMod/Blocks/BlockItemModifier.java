@@ -193,7 +193,7 @@ public class BlockItemModifier extends Block {
      */
     public TileEntity createNewTileEntity(World par1World)
     {
-        return new TileEntityFurnace();
+        return new TileEntityItemModifier();
     }
 
     /**

@@ -94,7 +94,7 @@ public class RandomUtilitiesMod
 //	    	GameRegistry.registerItem(potionBow, "potion_bow", modid);
 //	    	
 //	    	EntityRegistry.registerModEntity(EntityPArrow.class, "potion_arrow", 1, this, 30, 1, true);
-	    	
+	    	NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 	    	
 	    	CraftingManager.init();
 	    }

@@ -46,7 +46,7 @@ public class TileEntityItemModifier extends TileEntity implements IInventory
 
 	@Override
 	public int getInventoryStackLimit() {
-		return 0;
+		return 64;
 	}
 
 	@Override
@@ -57,12 +57,12 @@ public class TileEntityItemModifier extends TileEntity implements IInventory
 
 	@Override
 	public ItemStack getStackInSlot(int arg0) {
-		return null;
+		return this.inventory[arg0];
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int arg0) {
-		return null;
+		return this.inventory[arg0];
 	}
 
 	@Override
@@ -77,7 +77,8 @@ public class TileEntityItemModifier extends TileEntity implements IInventory
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer arg0) {
-		return false;
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this &&
+        arg0.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
 	}
 
 	@Override
