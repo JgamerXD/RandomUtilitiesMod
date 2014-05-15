@@ -1,5 +1,6 @@
 package com.github.JgamerXD.RandomUtilitiesMod.Modifier;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
 public class Modifier {
@@ -9,9 +10,14 @@ public class Modifier {
 		
 	}
 	
-	void onRightClick(ItemStack item)
-	{}
-	void onHit(en)
+	//Item
+	void onRightClick(ItemStack item){}
+	void onHit(ItemStack item,EntityLivingBase entityHit){}
+	
+	//Entity
+	void onHit(EntityModified entity,EntityLivingBase entityHit){}	
+	void entityUpdate(EntityModified entity){}
+	void entityHitGround(EntityModified entity){}
 	
 	
 }

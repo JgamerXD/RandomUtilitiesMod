@@ -74,7 +74,7 @@ public class RandomUtilitiesMod
 	    	
 	    	obsidianCrystalBlock = new BlockObsidianCrystal(Material.rock).setBlockTextureName(modid + ":" + "obsidian_crystal_block").setBlockName("obsidianCrystalBlock");
 	    	flintBlock = new BlockFlint(Material.rock).setBlockTextureName(modid + ":" + "flint_block").setBlockName("flintBlock");
-	    	itemModifier = new BlockItemModifier(Material.rock).setBlockTextureName(modid + ":" + "item_modifier").setBlockName("itemModifier");
+	    	itemModifier = new BlockItemModifier(Material.rock).setBlockName("itemModifier");
 	    	
 	    	
 	    	

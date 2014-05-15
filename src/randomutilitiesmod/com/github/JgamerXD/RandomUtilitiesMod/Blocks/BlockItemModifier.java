@@ -107,6 +107,7 @@ public class BlockItemModifier extends Block {
      */
     public IIcon getIcon(int par1, int par2)
     {
+        //return par1 == 1 ? this.modifierIconTop : (par1 == 0 ? this.modifierIconTop : (par1 != par2 ? this.blockIcon : this.modifierIconFront));
         return par1 == 1 ? this.modifierIconTop : (par1 == 0 ? this.modifierIconTop : (par1 != par2 ? this.blockIcon : this.modifierIconFront));
     }
 
@@ -119,7 +120,7 @@ public class BlockItemModifier extends Block {
     public void registerIcons(IIconRegister par1IconRegister)
     {
         this.blockIcon = par1IconRegister.registerIcon("modifier_side");
-        this.modifierIconFront = par1IconRegister.registerIcon("modifier_front");
+        //this.modifierIconFront = par1IconRegister.registerIcon("modifier_front");
         this.modifierIconTop = par1IconRegister.registerIcon("modifier_top");
     }
 
