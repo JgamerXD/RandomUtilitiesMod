@@ -8,4 +8,10 @@ public class Modifier {
 	{
 		
 	}
+	
+	void onRightClick(ItemStack item)
+	{}
+	void onHit(en)
+	
+	
 }
