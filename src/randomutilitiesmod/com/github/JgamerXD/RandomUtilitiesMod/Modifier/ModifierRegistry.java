@@ -8,54 +8,68 @@ import net.minecraft.item.ItemStack;
 public class ModifierRegistry
 {
 	//focus , item
-	private static HashMap modifiers = new HashMap<Item, HashMap<Item , Modifier>>();
+	private static HashMap recipes = new HashMap<Item, HashMap<Item , ModifierInstance>>();
+	private static HashMap modifiers = new HashMap<String,Modifier>();
 	
-	public static void registerModifier(Modifier modifier, ItemStack focus, ItemStack item)
+	public static void registerModifer(Modifier modifier,String id)
 	{
-		HashMap focusMap = (HashMap) modifiers.get(focus.getItem());
+		if(modifiers.get(id) == null)
+			modifiers.put(modifier,id);
+		else
+			System.err.print("Could not register modifier: "+modifier.getClass()+" id already occupied");
+	}
+	
+	public static Modifier getModifier(String id)
+	{
+		return (Modifier) modifiers.get(id);
+	}
+	
+	public static void registerRecipe(ModifierInstance modifier, ItemStack focus, ItemStack item)
+	{
+		HashMap focusMap = (HashMap) recipes.get(focus.getItem());
 		if(focusMap == null)
 			focusMap = new HashMap<Item , Modifier>();
 		if(focusMap.get(item.getItem()) != null)
-			System.err.print("Could not register modifier: "+modifier.getClass()+" item/focus already occupied");
+			System.err.print("Could not register recipe for: "+modifier.getClass()+" item/focus already occupied");
 		else
 			focusMap.put(item.getItem(), modifier);
-		modifiers.put(focus.getItem(), focusMap);
+		recipes.put(focus.getItem(), focusMap);
 	}
 	
-	public static void registerModifier(Modifier modifier, Item focus, Item item)
+	public static void registerRecipe(ModifierInstance modifier, Item focus, Item item)
 	{
-		HashMap focusMap = (HashMap) modifiers.get(focus);
+		HashMap focusMap = (HashMap) recipes.get(focus);
 		if(focusMap == null)
 			focusMap = new HashMap<Item , Modifier>();
 		if(focusMap.get(item) != null)
-			System.err.print("Could not register modifier: "+modifier.getClass()+" item/focus already occupied");
+			System.err.print("Could not register recipe for: "+modifier.getClass()+" item/focus already occupied");
 		else
 			focusMap.put(item, modifier);
-		modifiers.put(focus, focusMap);
+		recipes.put(focus, focusMap);
 	}
 	
 
 	
-	public static Modifier getModifier(Item focus, Item item)
+	public static Modifier getResult(Item focus, Item item)
 	{	
-		HashMap focusMap=(HashMap) modifiers.get(focus);
+		HashMap focusMap=(HashMap) recipes.get(focus);
 		
 		if(focusMap != null)
 			return (Modifier)focusMap.get(item);
 		return null;
 	}
 	
-	public static Modifier getModifier(ItemStack focus, ItemStack item)
+	public static Modifier getResult(ItemStack focus, ItemStack item)
 	{	
-		HashMap focusMap=(HashMap) modifiers.get(focus.getItem());
+		HashMap focusMap=(HashMap) recipes.get(focus.getItem());
 		
 		if(focusMap != null)
 			return (Modifier)focusMap.get(item.getItem());
 		return null;
 	}
 	
-	public static boolean isModifier(ItemStack item)
+	public static boolean isFocus(ItemStack item)
 	{
-		return modifiers.get(item.getItem()) != null;
+		return recipes.get(item.getItem()) != null;
 	}
 }

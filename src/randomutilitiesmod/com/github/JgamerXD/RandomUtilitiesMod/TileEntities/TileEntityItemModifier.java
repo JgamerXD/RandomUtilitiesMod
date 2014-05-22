@@ -46,7 +46,7 @@ public class TileEntityItemModifier extends TileEntity implements IInventory
 
 	@Override
 	public int getInventoryStackLimit() {
-		return 64;
+		return 1;
 	}
 
 	@Override
@@ -81,14 +81,17 @@ public class TileEntityItemModifier extends TileEntity implements IInventory
         arg0.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
 	}
 
-	@Override
-	public void openInventory() {
-		
-	}
+//	@Override
+//	public void openInventory() {
+//		
+//	}
 
 	@Override
 	public void setInventorySlotContents(int arg0, ItemStack arg1) {
-		
+        inventory[arg0] = arg1;
+        if (arg1 != null && arg1.stackSize > getInventoryStackLimit()) {
+        	arg1.stackSize = getInventoryStackLimit();
+        }     
 	}
 
 
@@ -96,5 +99,11 @@ public class TileEntityItemModifier extends TileEntity implements IInventory
 	{
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void openInventory() {
+		// TODO Auto-generated method stub
+		
 	}
 }

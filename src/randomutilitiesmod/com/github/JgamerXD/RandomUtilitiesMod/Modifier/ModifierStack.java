@@ -10,7 +10,7 @@ import net.minecraft.potion.PotionEffect;
 
 public class ModifierStack
 {
-	private ArrayList<Modifier> modifiers;
+	private ArrayList<ModifierInstance> modifiers;
 
 	ModifierStack()
 	{
@@ -19,26 +19,31 @@ public class ModifierStack
 
 	void readForomNBT(NBTTagList par1NBTTagList)
 	{
-		ItemStack item, focus;
+		String id;
+		int level;
 		for (int var1 = 0; var1 < par1NBTTagList.tagCount(); ++var1)
 		{
 			NBTTagCompound var2 = (NBTTagCompound) par1NBTTagList.getCompoundTagAt(var1);
-
-			focus = ItemStack.loadItemStackFromNBT(var2.getCompoundTag("focus"));
-
-			NBTTagList var3 = (NBTTagList) var2.getTagList("items", 0);
-			for (int var4 = 0; var4 < par1NBTTagList.tagCount(); ++var4)
-			{
-				item = ItemStack.loadItemStackFromNBT(var3.getCompoundTagAt(var4).getCompoundTag("item"));
-
-				modifiers.add(ModifierRegistry.getModifier(focus, item));
-			}
+			id = var2.getString("id");
+			level = var2.getInteger("level");
+			modifiers.add(new ModifierInstance(ModifierRegistry.getModifier(id),level));
 		}
 	}
 
 	NBTTagList writeToNBT(NBTTagList par1NBTTagList)
 	{
-
+		String id;
+		int level;
+		NBTTagCompound tag = new NBTTagCompound();
+		
+		for (ModifierInstance current : modifiers)
+		{
+			id = current.getModifier().getId();
+			tag.setString("id",id);
+			level = current.getLevel();
+			tag.setInteger("level", level);
+			par1NBTTagList.appendTag(tag);
+		}
 		return par1NBTTagList;
 	}
 }
