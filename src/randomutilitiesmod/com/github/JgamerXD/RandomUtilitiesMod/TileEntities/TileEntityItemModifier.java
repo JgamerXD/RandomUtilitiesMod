@@ -60,11 +60,11 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 							Item modifiedItem = inventory[5].getItem();
 							if (modifiedItem instanceof IModifiable)
 							{
-								((IModifiable) modifiedItem).AddModifier(ModifierRegistry.getResult(current));
+								((IModifiable) modifiedItem).AddModifier(ModifierRegistry.getResult(current[0]));
 							}
 							else
 							{
-								ModifierRegistry.getModifiedItem
+								//ModifierRegistry.getModifiedItem
 							}
 						}
 					}
