@@ -15,3 +15,4 @@ item.obsidianCrystal.name=Obsidian Crystal
 #######################################
 tile.obsidianCrystalBlock.name=Obsidian Crystal Block
 tile.flintBlock.name=Flint Block
+tile.itemModifier.name=Item Modifier

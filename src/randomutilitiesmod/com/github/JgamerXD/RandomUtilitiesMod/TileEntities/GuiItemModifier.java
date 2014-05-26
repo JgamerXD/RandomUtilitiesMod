@@ -2,6 +2,8 @@ package com.github.JgamerXD.RandomUtilitiesMod.TileEntities;
 
 import org.lwjgl.opengl.GL11;
 
+import com.github.JgamerXD.RandomUtilitiesMod.RandomUtilitiesMod;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,7 +11,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiItemModifier extends GuiContainer
 {
-	private static final ResourceLocation image = new ResourceLocation("textures/gui/container/brewing_stand.png");
+	private static final ResourceLocation image = new ResourceLocation(RandomUtilitiesMod.modid + ":"
+			+ "textures/gui/item_modifier.png");
 	private TileEntityItemModifier itemModifier;
 
 	public GuiItemModifier(InventoryPlayer par1InventoryPlayer, TileEntityItemModifier par2TileEntityItemModifier)
@@ -26,7 +29,7 @@ public class GuiItemModifier extends GuiContainer
 	{
 		String s = this.itemModifier.isInvNameLocalized() ? this.itemModifier.getInventoryName() : I18n.format(this.itemModifier.getInventoryName());
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+//		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 	}
 
 	/**

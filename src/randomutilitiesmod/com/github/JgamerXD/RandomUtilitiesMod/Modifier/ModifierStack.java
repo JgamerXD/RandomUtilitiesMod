@@ -16,6 +16,12 @@ public class ModifierStack
 	{
 
 	}
+	
+	public void addModifier(ModifierInstance modifier)
+	{
+		if(!modifiers.contains(modifier))
+			modifiers.add(modifier);
+	}
 
 	void readForomNBT(NBTTagList par1NBTTagList)
 	{
