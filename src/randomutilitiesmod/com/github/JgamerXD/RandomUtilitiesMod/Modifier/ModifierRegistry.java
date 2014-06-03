@@ -11,7 +11,7 @@ public class ModifierRegistry
 	//focus , item
 	private static HashMap recipes = new HashMap<ModifierRecipe, ModifierInstance>();
 	private static HashMap modifiers = new HashMap<String,Modifier>();
-	private static HashMap modifiedItems = new HashMap<Item,IModifiable>();
+	private static HashMap modifiableItems = new HashMap<Item,IModifiable>();
 	
 	
 	public static void registerModifer(Modifier modifier,String id)
@@ -54,9 +54,15 @@ public class ModifierRegistry
 	{	
 		return (ModifierInstance) recipes.get(recipe);
 	}
+
+    public static IModifiable getModifiable(Item item)
+    {
+        return (IModifiable) modifiableItems.get(item);
+    }
 	
 	public static boolean isRecipe(ModifierRecipe recipe)
 	{
 		return recipes.containsKey(recipe);
 	}
+
 }

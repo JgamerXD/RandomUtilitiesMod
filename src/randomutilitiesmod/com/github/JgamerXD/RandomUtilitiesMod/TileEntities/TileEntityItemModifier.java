@@ -60,33 +60,45 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 							Item modifiedItem = inventory[5].getItem();
 							if (modifiedItem instanceof IModifiable)
 							{
-								((IModifiable) modifiedItem).AddModifier(ModifierRegistry.getResult(current[0]));
+								((IModifiable) modifiedItem).AddModifier(ModifierRegistry.getResult(current[i]));
 							}
 							else
 							{
-								//ModifierRegistry.getModifiedItem
+                                modifiedItem = (Item) ModifierRegistry.getModifiable(modifiedItem);
+                                inventory[0].
 							}
 						}
 					}
 				}
 				else
 				{
-
+                    active = false;
 				}
 
 			}
 			if (validateCurrentRecipe())
-			{
-
-			}
+                if(!active) {
+                    active = true;
+                    progress = WORKING_TIME;
+                }
+            else
+            {
+                active = false;
+            }
 		}
 	}
 
 	private void updateCurrentRecipes()
 	{
-		current[0] = new ModifierRecipe(inventory[0], inventory[4], inventory[5]);
-		current[1] = new ModifierRecipe(inventory[1], inventory[4], inventory[5]);
-		current[2] = new ModifierRecipe(inventory[2], inventory[4], inventory[5]);
+        Item focus = inventory[4].getItem();
+        Item item = inventory[5].getItem();
+        if(!(item instanceof IModifiable))
+            item = (Item) ModifierRegistry.getModifiable(item);
+        for(int i=0;i<4;i++) {
+            Item modifier = inventory[i].getItem();
+
+            current[i] = new ModifierRecipe(modifier, focus, item);
+        }
 	}
 
 	private boolean validateCurrentRecipe()
@@ -98,23 +110,18 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 		if (!ModifierRegistry.isRecipe(current[1]) && inventory[1] != null)
 			valid = false;
 		if (!ModifierRegistry.isRecipe(current[2]) && inventory[2] != null)
-			valid = false;
+            valid = false;
+        if (!ModifierRegistry.isRecipe(current[3]) && inventory[3] != null)
+            valid = false;
 
 		return valid;
 	}
 
 	@Override
-	public void openInventory()
-	{
-		// TODO Auto-generated method stub
-
-	}
+	public void openInventory() {}
 
 	@Override
-	public void closeInventory()
-	{
-
-	}
+	public void closeInventory() {}
 
 	@Override
 	public ItemStack getStackInSlot(int arg0)
@@ -174,14 +181,13 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 	@Override
 	public int getSizeInventory()
 	{
-		// TODO Auto-generated method stub
 		return inventory.length;
 	}
 
 	@Override
 	public boolean hasCustomInventoryName()
 	{
-		return name != null;
+		return name != null && name.length() < 0;
 	}
 
 	@Override
@@ -208,7 +214,6 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 
 	public boolean isInvNameLocalized()
 	{
-		// TODO Auto-generated method stub
 		return !hasCustomInventoryName();
 	}
 
