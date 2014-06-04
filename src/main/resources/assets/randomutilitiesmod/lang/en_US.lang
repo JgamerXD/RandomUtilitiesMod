@@ -1,0 +1,18 @@
+#######################################
+#CreativeTabs
+#######################################
+itemGroup.RandomUtilities=Random Utilities
+
+
+#######################################
+#Items
+#######################################
+item.obsidianCrystal.name=Obsidian Crystal
+
+
+#######################################
+#Blocks
+#######################################
+tile.obsidianCrystalBlock.name=Obsidian Crystal Block
+tile.flintBlock.name=Flint Block
+tile.itemModifier.name=Item Modifier
