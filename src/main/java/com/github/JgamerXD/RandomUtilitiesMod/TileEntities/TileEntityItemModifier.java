@@ -2,10 +2,9 @@ package com.github.JgamerXD.RandomUtilitiesMod.TileEntities;
 
 import java.util.List;
 
-import com.github.JgamerXD.RandomUtilitiesMod.Modifier.IModifiable;
-import com.github.JgamerXD.RandomUtilitiesMod.Modifier.ModifierRecipe;
-import com.github.JgamerXD.RandomUtilitiesMod.Modifier.ModifierRegistry;
-import com.github.JgamerXD.RandomUtilitiesMod.TModifiable;
+import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.IModifiable;
+import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierRecipe;
+import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierRegistry;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -58,16 +57,16 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 						for (int i = 0; i < 3; i++)
 						{
 							Item modifiedItem = inventory[5].getItem();
-							if (modifiedItem instanceof TModifiable)
+							if (modifiedItem instanceof IModifiable)
 							{
-								((TModifiable) modifiedItem).AddModifier(inventory[5],ModifierRegistry.getResult(current[i]));
+								((IModifiable) modifiedItem).addModifier(inventory[5],ModifierRegistry.getResult(current[i]));
 							}
 							else
 							{
                                 modifiedItem = (Item) ModifierRegistry.getModifiable(modifiedItem);
                                 ItemStack modifiedStack = new ItemStack(modifiedItem,1,0);
                                 modifiedStack.setTagCompound(inventory[i].getTagCompound());
-                                (TModifiable)(modifiedStack.getItem()).
+                                ((IModifiable)modifiedStack.getItem()).addModifier(modifiedStack,ModifierRegistry.getResult(current[i]));
                                 inventory[i] = modifiedStack;
 							}
 						}

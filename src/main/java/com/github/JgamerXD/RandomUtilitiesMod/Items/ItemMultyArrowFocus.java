@@ -4,9 +4,9 @@ import com.github.JgamerXD.RandomUtilitiesMod.RandomUtilitiesMod;
 
 import net.minecraft.item.Item;
 
-public class MultiArrow extends Item
+public class ItemMultyArrowFocus extends Item
 {
-	MultiArrow()
+    public ItemMultyArrowFocus()
 	{
 		this.setCreativeTab(RandomUtilitiesMod.randomTab);
 	}

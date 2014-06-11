@@ -1,4 +1,4 @@
-package com.github.JgamerXD.RandomUtilitiesMod.Modifier;
+package com.github.JgamerXD.RandomUtilitiesMod.Modifiers;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

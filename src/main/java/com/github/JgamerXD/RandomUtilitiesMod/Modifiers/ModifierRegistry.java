@@ -1,4 +1,4 @@
-package com.github.JgamerXD.RandomUtilitiesMod.Modifier;
+package com.github.JgamerXD.RandomUtilitiesMod.Modifiers;
 
 import java.util.HashMap;
 
@@ -24,6 +24,11 @@ public class ModifierRegistry
 	public static Modifier getModifier(String id)
 	{
 		return (Modifier) modifiers.get(id);
+	}
+	
+	public static void registerModifiable(Item item,IModifiable modifiable)
+	{
+		modifiableItems.put(item,modifiable);
 	}
 	
 	public static void registerRecipe(ModifierInstance modifier, ItemStack focus, ItemStack item)
