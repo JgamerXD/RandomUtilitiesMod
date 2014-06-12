@@ -16,11 +16,12 @@ public class ModifierStack
 
 	public ModifierStack()
 	{
-
+		modifiers = new ArrayList<ModifierInstance>();
 	}
 	
 	public void addModifier(ModifierInstance modifier)
 	{
+			
 		if(!modifiers.contains(modifier))
 			modifiers.add(modifier);
 	}
@@ -43,15 +44,15 @@ public class ModifierStack
 		String id;
 		int level;
 		NBTTagCompound tag = new NBTTagCompound();
-		
-		for (ModifierInstance current : modifiers)
-		{
-			id = current.getModifier().getId();
-			tag.setString("id",id);
-			level = current.getLevel();
-			tag.setInteger("level", level);
-			par1NBTTagList.appendTag(tag);
-		}
+		if (modifiers!= null)
+			for (ModifierInstance current : modifiers)
+			{
+				id = current.getModifier().getId();
+				tag.setString("id",id);
+				level = current.getLevel();
+				tag.setInteger("level", level);
+				par1NBTTagList.appendTag(tag);
+			}
 		return par1NBTTagList;
 	}
 

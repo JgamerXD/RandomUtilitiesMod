@@ -31,10 +31,23 @@ public class ItemModifiedBow extends ItemBow implements IModifiable{
 
     public void addModifier(ItemStack stack,ModifierInstance modifier){
         ModifierStack modifierStack  = new ModifierStack();
-        modifierStack.readFromNBT(stack.getTagCompound().getTagList("Modifiers", 0));
-        modifierStack.addModifier(modifier);
+        NBTTagCompound tag;
+    	if(stack.hasTagCompound())
+    	{
+    		tag = stack.getTagCompound();
+    	} 
+    	else
+    		tag=new NBTTagCompound();
+    	if(tag.hasKey("modifiers"))
+    	{
+    		modifierStack.readFromNBT(tag.getTagList("modifiers", 0));
+
+    	}  
+    	modifierStack.addModifier(modifier);
+    	tag.setTag("modifiers", modifierStack.writeToNBT(new NBTTagList()));
+    	
+        
         NBTTagCompound tmp = stack.getTagCompound();
-        tmp.setTag("Modifiers", modifierStack.writeToNBT(new NBTTagList()));
         stack.setTagCompound(tmp);
     }
 
@@ -99,8 +112,18 @@ public class ItemModifiedBow extends ItemBow implements IModifiable{
 
             if (par2World.isRemote)
             {
-                ModifierStack modifiers = new ModifierStack();
-                modifiers.readFromNBT(par1ItemStack.getTagCompound().getTagList("modifiers", 0));
+            	if(par1ItemStack.hasTagCompound())
+            	{
+            		NBTTagCompound tag = par1ItemStack.getTagCompound();
+            		if(tag.hasKey("modifier"))
+            		{
+            		ModifierStack modifiers = new ModifierStack();
+            		modifiers.readFromNBT(par1ItemStack.getTagCompound().getTagList("modifiers", 0));
+            		modifiers.shootEntity(par1ItemStack, var8);
+            		}
+                
+            	}
+               
                 par2World.spawnEntityInWorld(var8);
             }
         }

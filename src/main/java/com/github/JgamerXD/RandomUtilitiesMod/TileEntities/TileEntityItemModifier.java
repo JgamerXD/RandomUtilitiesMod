@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityItemModifier extends TileEntity implements ISidedInventory, ICrafting
 {
-	private final int WORKING_TIME = 400;
+	private final int WORKING_TIME = 1;
 
 	private ItemStack inventory[];
 	// progress in remaining ticks
@@ -31,8 +31,8 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 	private int[] input_bottom = {};
 	private int[] input_sides = { 0, 1, 2, 3 };
 
-	ModifierRecipe[] current = new ModifierRecipe[3];
-	ModifierRecipe[] latest = new ModifierRecipe[3];
+	ModifierRecipe[] current = new ModifierRecipe[4];
+	ModifierRecipe[] latest = new ModifierRecipe[4];
 
 	public TileEntityItemModifier()
 	{
@@ -52,6 +52,7 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 				if (current.equals(latest))
 				{
 					progress--;
+					System.out.println(progress);
 					if (progress == 0)
 					{
 						for (int i = 0; i < 3; i++)
@@ -60,6 +61,7 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 							if (modifiedItem instanceof IModifiable)
 							{
 								((IModifiable) modifiedItem).addModifier(inventory[5],ModifierRegistry.getResult(current[i]));
+								System.out.println("ready");
 							}
 							else
 							{
@@ -68,7 +70,12 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
                                 modifiedStack.setTagCompound(inventory[i].getTagCompound());
                                 ((IModifiable)modifiedStack.getItem()).addModifier(modifiedStack,ModifierRegistry.getResult(current[i]));
                                 inventory[i] = modifiedStack;
+                                System.out.println("ready");
 							}
+							inventory[0]=null;
+							inventory[1]=null;
+							inventory[2]=null;
+							inventory[3]=null;
 						}
 					}
 				}
@@ -97,16 +104,19 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
         if(!(item instanceof IModifiable))
             item = (Item) ModifierRegistry.getModifiable(item);
         for(int i=0;i<4;i++) {
-            Item modifier = inventory[i].getItem();
-
-            current[i] = new ModifierRecipe(modifier, focus, item);
+        	if(inventory[i] != null)
+        	{
+        		Item modifier = inventory[i].getItem();
+        		current[i] = new ModifierRecipe(modifier, focus, item);
+        	}
+            
         }
 	}
 
 	private boolean validateCurrentRecipe()
 	{
 		boolean valid = true;
-
+		
 		if (!ModifierRegistry.isRecipe(current[0]) && inventory[0] != null)
 			valid = false;
 		if (!ModifierRegistry.isRecipe(current[1]) && inventory[1] != null)

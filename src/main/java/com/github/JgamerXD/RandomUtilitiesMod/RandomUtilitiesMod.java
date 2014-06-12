@@ -50,7 +50,7 @@ public class RandomUtilitiesMod
 	    public static Block flintBlock;
 	    public static Block itemModifier;
 	    public static Block poisonBlock;
-	    public static Block sugarBlock
+	    public static Block sugarBlock;
 
 
 	    public static Item potionArrow;
@@ -70,10 +70,11 @@ public class RandomUtilitiesMod
 	    	
 	    	obsidianCrystal = new ItemObsidianCrystal().setTextureName(modid +":" + "obsidian_crystal").setUnlocalizedName("obsidianCrystal");
             modifiedBow = new ItemModifiedBow().setUnlocalizedName("modifiedBow");
-            multyArrow = new ItemMultyArrowFocus().setTextureName(modid +":" + "multy_arrow_focus");
+            multyArrow = new ItemMultyArrowFocus().setTextureName(modid +":" + "multy_arrow_focus").setUnlocalizedName("multiArrow");
 	    	
 	    	obsidianCrystalBlock = new BlockObsidianCrystal(Material.rock).setBlockTextureName(modid + ":" + "obsidian_crystal_block").setBlockName("obsidianCrystalBlock");
 	    	flintBlock = new BlockFlint(Material.rock).setBlockTextureName(modid + ":" + "flint_block").setBlockName("flintBlock");
+//	    	poisonBlock = new BlockPoison
 	    	itemModifier = new BlockItemModifier(Material.rock).setBlockName("itemModifier");
 	    	
 	    	
@@ -81,13 +82,13 @@ public class RandomUtilitiesMod
 	    	GameRegistry.registerItem(obsidianCrystal, "obsidian_crystal", modid);
 	    	GameRegistry.registerItem(multyArrow, "multi_arrow", modid);
 	    	GameRegistry.registerItem(modifiedBow, "modified_bow", modid);
-	    	GameRegister.registerItem(dagger, "dager_standard");	    	
+//	    	GameRegistry.registerItem(dagger, "dager_standard", modid);	    	
 	    	
 	    	GameRegistry.registerBlock(obsidianCrystalBlock, "obsidian_crystal_block");
 	    	GameRegistry.registerBlock(flintBlock, "flint_block");
 	    	GameRegistry.registerBlock(itemModifier, "item_modifier");
-	    	GameRegistry.registerBlock(sugarBlock, "sugar_block");
-	    	GameRegistry.registerBlock(poisonBlock, "poison_block");
+//	    	GameRegistry.registerBlock(sugarBlock, "sugar_block");
+//	    	GameRegistry.registerBlock(poisonBlock, "poison_block");
 	    	
 	    	GameRegistry.registerTileEntity(TileEntityItemModifier.class, "ItemModifier");
 	    	

@@ -40,30 +40,28 @@ public class CraftingManager {
 			'X', RandomUtilitiesMod.flintBlock	
 		});
 		
-		GameRegistry.addRecipe(new ItemStack(RandomUtilitiesMod.poisonBlock,1,0), new Object[]{
-			"XXX",
-			"XXX",
-			"XXX",
-			'X' ,Items.spieder_eye
-		});
-		
-		GameRegistry.addRecipe(new ItemStack(Items.spider_eye,9,0), new Object[]{
-			"X",
-			'X', RandomUtilitiesMod.poisonBlock
-		});
-		
-		GameRegistry.addRecipe(new ItemStack(RandomUtilitiesMod.sugarBlock,1,0), new Object[]{
-			"XXX",
-			"XXX",
-			"XXX",
-			'X' ,Items.sugar
-		});
-		
-		GameRegistry.addRecipe(new ItemStack(Items.sugar,9,0), new Object[]{
-			"X",
-			'X', RandomUtilitiesMod.sugarBlock
-		});
-		
-		}
+//		GameRegistry.addRecipe(new ItemStack(RandomUtilitiesMod.poisonBlock,1,0), new Object[]{
+//			"XXX",
+//			"XXX",
+//			"XXX",
+//			'X' ,Items.spider_eye
+//		});
+//		
+//		GameRegistry.addRecipe(new ItemStack(Items.spider_eye,9,0), new Object[]{
+//			"X",
+//			'X', RandomUtilitiesMod.poisonBlock
+//		});
+//		
+//		GameRegistry.addRecipe(new ItemStack(RandomUtilitiesMod.sugarBlock,1,0), new Object[]{
+//			"XXX",
+//			"XXX",
+//			"XXX",
+//			'X' ,Items.sugar
+//		});
+//		
+//		GameRegistry.addRecipe(new ItemStack(Items.sugar,9,0), new Object[]{
+//			"X",
+//			'X', RandomUtilitiesMod.sugarBlock
+//		});
 	}
 }
