@@ -44,16 +44,19 @@ public class RandomUtilitiesMod
 	    public static Item obsidianCrystal;
         public static Item modifiedBow;
         public static Item multyArrow;
+	    public static Item dagger;
 
 	    public static Block obsidianCrystalBlock;
 	    public static Block flintBlock;
 	    public static Block itemModifier;
+	    public static Block poisonBlock;
+	    public static Block sugarBlock
 
 
 	    public static Item potionArrow;
 	    public static Item potionBow;
 
-
+	    
 
 		@SidedProxy(modId=modid,clientSide="com.github.JgamerXD.RandomUtilitiesMod.ClientProxy", serverSide="com.github.JgamerXD.RandomUtilitiesMod.CommonProxy")
 	      public static CommonProxy proxy;
@@ -78,11 +81,13 @@ public class RandomUtilitiesMod
 	    	GameRegistry.registerItem(obsidianCrystal, "obsidian_crystal", modid);
 	    	GameRegistry.registerItem(multyArrow, "multi_arrow", modid);
 	    	GameRegistry.registerItem(modifiedBow, "modified_bow", modid);
-	    	
+	    	GameRegister.registerItem(dagger, "dager_standard");	    	
 	    	
 	    	GameRegistry.registerBlock(obsidianCrystalBlock, "obsidian_crystal_block");
 	    	GameRegistry.registerBlock(flintBlock, "flint_block");
 	    	GameRegistry.registerBlock(itemModifier, "item_modifier");
+	    	GameRegistry.registerBlock(sugarBlock, "sugar_block");
+	    	GameRegistry.registerBlock(poisonBlock, "poison_block");
 	    	
 	    	GameRegistry.registerTileEntity(TileEntityItemModifier.class, "ItemModifier");
 	    	
