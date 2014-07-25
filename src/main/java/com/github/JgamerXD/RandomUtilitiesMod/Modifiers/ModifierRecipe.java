@@ -9,12 +9,6 @@ public class ModifierRecipe
 	private Item focus;
 	private Item item;
 	
-	public ModifierRecipe(ItemStack modifier, ItemStack focus, ItemStack item)
-	{
-		this.modifier = modifier.getItem();
-		this.focus = focus.getItem();
-		this.item = item.getItem();
-	}
 	
 	public ModifierRecipe(Item modifier, Item focus, Item item)
 	{

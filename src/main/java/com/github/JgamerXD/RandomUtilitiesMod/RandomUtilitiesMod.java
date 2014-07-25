@@ -4,6 +4,7 @@ import com.github.JgamerXD.RandomUtilitiesMod.Blocks.BlockFlint;
 import com.github.JgamerXD.RandomUtilitiesMod.Blocks.BlockItemModifier;
 import com.github.JgamerXD.RandomUtilitiesMod.Blocks.BlockObsidianCrystal;
 import com.github.JgamerXD.RandomUtilitiesMod.Items.ItemModifiedBow;
+import com.github.JgamerXD.RandomUtilitiesMod.Items.ItemModifierFocus;
 import com.github.JgamerXD.RandomUtilitiesMod.Items.ItemMultyArrowFocus;
 import com.github.JgamerXD.RandomUtilitiesMod.Items.ItemObsidianCrystal;
 import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierManager;
@@ -45,6 +46,7 @@ public class RandomUtilitiesMod
         public static Item modifiedBow;
         public static Item multyArrow;
 	    public static Item dagger;
+        public static Item modifierFocus;
 
 	    public static Block obsidianCrystalBlock;
 	    public static Block flintBlock;
@@ -71,6 +73,7 @@ public class RandomUtilitiesMod
 	    	obsidianCrystal = new ItemObsidianCrystal().setTextureName(modid +":" + "obsidian_crystal").setUnlocalizedName("obsidianCrystal");
             modifiedBow = new ItemModifiedBow().setUnlocalizedName("modifiedBow");
             multyArrow = new ItemMultyArrowFocus().setTextureName(modid +":" + "multy_arrow_focus").setUnlocalizedName("multiArrow");
+            modifierFocus = new ItemModifierFocus().setTextureName(modid +":" + "focus_base").setUnlocalizedName("baseFocus");
 	    	
 	    	obsidianCrystalBlock = new BlockObsidianCrystal(Material.rock).setBlockTextureName(modid + ":" + "obsidian_crystal_block").setBlockName("obsidianCrystalBlock");
 	    	flintBlock = new BlockFlint(Material.rock).setBlockTextureName(modid + ":" + "flint_block").setBlockName("flintBlock");
@@ -82,6 +85,7 @@ public class RandomUtilitiesMod
 	    	GameRegistry.registerItem(obsidianCrystal, "obsidian_crystal", modid);
 	    	GameRegistry.registerItem(multyArrow, "multi_arrow", modid);
 	    	GameRegistry.registerItem(modifiedBow, "modified_bow", modid);
+            GameRegistry.registerItem(modifierFocus, "modifier_focus", modid);
 //	    	GameRegistry.registerItem(dagger, "dager_standard", modid);	    	
 	    	
 	    	GameRegistry.registerBlock(obsidianCrystalBlock, "obsidian_crystal_block");

@@ -5,6 +5,7 @@ import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.Modifier;
 import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierInstance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 
 import java.util.ArrayList;
@@ -23,20 +24,35 @@ public class ModifierMultiProjectile extends Modifier implements IShootingModifi
     public boolean shootEntity(ModifierInstance par1ModifierInstance, Entity par2Entity) {
         double pitch = par2Entity.rotationPitch;
         double yaw = par2Entity.rotationYaw;
-        double step = 0.1;
-        double phi = 0.0;
+        double xCoord = par2Entity.posX;
+        double yCoord = par2Entity.posY;
+        double zCoord = par2Entity.posZ;
+        float speed = 1;
 
-        for(int i=0;i < par1ModifierInstance.getLevel();i++)
+        double step = 2;
+        double phi = step;
+
+        System.out.println("Shooting multiple arrows!!");
+
+        for(int i=0;i < (par1ModifierInstance.getLevel()*3);i++)
         {
-            double r = 0.1 * 1;
-            double p = pitch + r * Math.cos(phi);
-            double y = yaw + r * Math.sin(phi);
+            double r = 2;
+            float p = (float)(pitch + r * Math.cos(phi));
+            float y = (float)(yaw + r * Math.sin(phi));
 
 
             phi += step;
             EntityArrow tmp = new EntityArrow(par2Entity.worldObj);
             tmp.copyDataFrom(par2Entity, true);
-            tmp.setAngles((float)p,(float)y);
+            tmp.canBePickedUp = 2;
+
+            tmp.setAngles(p,y);
+
+            tmp.motionX = (double)(-MathHelper.sin(y / 180.0F * (float) Math.PI) * MathHelper.cos(p / 180.0F * (float)Math.PI));
+            tmp.motionZ = (double)(-MathHelper.cos(y / 180.0F * (float)Math.PI) * MathHelper.cos(p / 180.0F * (float)Math.PI));
+            tmp.motionY = (double)(-MathHelper.sin(p / 180.0F * (float)Math.PI));
+            tmp.setThrowableHeading(tmp.motionX, tmp.motionY, tmp.motionZ,speed * -1.5F, 1.0F);
+
             par2Entity.worldObj.spawnEntityInWorld(tmp);
         }
         return true;

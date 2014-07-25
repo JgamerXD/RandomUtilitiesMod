@@ -9,7 +9,7 @@ public class ItemModifierFocus extends Item
 //	private IIcon base;
 //	private IIcon focus;
 //	private String focusIconName;
-	private ItemModifierFocus()
+	public ItemModifierFocus()
 	{
 		super();
 		this.setCreativeTab(RandomUtilitiesMod.randomTab);

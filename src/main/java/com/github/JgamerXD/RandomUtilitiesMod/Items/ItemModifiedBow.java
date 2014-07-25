@@ -110,22 +110,24 @@ public class ItemModifiedBow extends ItemBow implements IModifiable{
                 par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
             }
 
-            if (par2World.isRemote)
+            if (!par2World.isRemote)
             {
             	if(par1ItemStack.hasTagCompound())
             	{
+                    System.out.println("has tag");
             		NBTTagCompound tag = par1ItemStack.getTagCompound();
-            		if(tag.hasKey("modifier"))
+            		if(tag.hasKey("modifiers"))
             		{
-            		ModifierStack modifiers = new ModifierStack();
-            		modifiers.readFromNBT(par1ItemStack.getTagCompound().getTagList("modifiers", 0));
-            		modifiers.shootEntity(par1ItemStack, var8);
+                        System.out.println("Using modifiers");
+            		    ModifierStack modifiers = new ModifierStack();
+                        System.out.println(par1ItemStack.getTagCompound().getTag("modifiers"));
+            		    modifiers.readFromNBT((NBTTagList) par1ItemStack.getTagCompound().getTag("modifiers"));
+            		    modifiers.shootEntity(par1ItemStack, var8);
             		}
-                
             	}
-               
                 par2World.spawnEntityInWorld(var8);
             }
+
         }
     }
 }

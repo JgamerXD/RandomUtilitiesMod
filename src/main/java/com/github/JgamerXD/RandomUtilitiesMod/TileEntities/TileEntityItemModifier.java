@@ -52,7 +52,7 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 				if (current.equals(latest))
 				{
 					progress--;
-					System.out.println(progress);
+					//System.out.println(progress);
 					if (progress == 0)
 					{
 						for (int i = 0; i < 3; i++)
@@ -61,22 +61,23 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 							if (modifiedItem instanceof IModifiable)
 							{
 								((IModifiable) modifiedItem).addModifier(inventory[5],ModifierRegistry.getResult(current[i]));
-								System.out.println("ready");
 							}
 							else
 							{
                                 modifiedItem = (Item) ModifierRegistry.getModifiable(modifiedItem);
                                 ItemStack modifiedStack = new ItemStack(modifiedItem,1,0);
-                                modifiedStack.setTagCompound(inventory[i].getTagCompound());
+                                modifiedStack.setTagCompound(inventory[5].getTagCompound());
                                 ((IModifiable)modifiedStack.getItem()).addModifier(modifiedStack,ModifierRegistry.getResult(current[i]));
-                                inventory[i] = modifiedStack;
-                                System.out.println("ready");
+                                inventory[5] = modifiedStack;
 							}
+                            current = null;
 							inventory[0]=null;
 							inventory[1]=null;
 							inventory[2]=null;
 							inventory[3]=null;
+
 						}
+                        active = false;
 					}
 				}
 				else
@@ -85,16 +86,14 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 				}
 
 			}
-			if (validateCurrentRecipe())
+			if (active == false && validateCurrentRecipe())
                 if(!active) {
                     active = true;
                     progress = WORKING_TIME;
                 }
-            else
-            {
-                active = false;
-            }
 		}
+        if(!active)
+            current = null;
 	}
 
 	private void updateCurrentRecipes()
@@ -104,7 +103,7 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
         if(!(item instanceof IModifiable))
             item = (Item) ModifierRegistry.getModifiable(item);
         for(int i=0;i<4;i++) {
-        	if(inventory[i] != null)
+        	if(inventory[i].getItem() != null && inventory[i].stackSize > 0)
         	{
         		Item modifier = inventory[i].getItem();
         		current[i] = new ModifierRecipe(modifier, focus, item);
@@ -117,13 +116,13 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 	{
 		boolean valid = true;
 		
-		if (!ModifierRegistry.isRecipe(current[0]) && inventory[0] != null)
+		if (current[0] != null && !ModifierRegistry.isRecipe(current[0]) && inventory[0] != null)
 			valid = false;
-		if (!ModifierRegistry.isRecipe(current[1]) && inventory[1] != null)
+		if (current[1] != null && !ModifierRegistry.isRecipe(current[1]) && inventory[1] != null)
 			valid = false;
-		if (!ModifierRegistry.isRecipe(current[2]) && inventory[2] != null)
+		if (current[2] != null && !ModifierRegistry.isRecipe(current[2]) && inventory[2] != null)
             valid = false;
-        if (!ModifierRegistry.isRecipe(current[3]) && inventory[3] != null)
+        if (current[3] != null && !ModifierRegistry.isRecipe(current[3]) && inventory[3] != null)
             valid = false;
 
 		return valid;
@@ -176,7 +175,7 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 		if (name != null)
 			return name;
 		else
-			return "tile.itemModifier.name";
+			return "Bug";
 	}
 
 	public void setInventoryName(String name)

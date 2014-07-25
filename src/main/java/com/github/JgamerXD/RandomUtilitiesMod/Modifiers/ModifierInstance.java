@@ -2,13 +2,20 @@ package com.github.JgamerXD.RandomUtilitiesMod.Modifiers;
 
 public class ModifierInstance
 {
-
-
 	private Modifier modifier;
 	private int level;
-	
+
+
+    public ModifierInstance(Modifier modifier, int level)
+    {
+        this.modifier = modifier;
+        this.level = level;
+    }
+
 	public Modifier getModifier()
 	{
+        if(modifier==null)
+            System.out.println("Modifier not set?!?");
 		return modifier;
 	}
 
@@ -27,11 +34,7 @@ public class ModifierInstance
 		this.level = level;
 	}
 
-	public ModifierInstance(Modifier modifier, int level)
-	{
-		this.modifier = modifier;
-		this.level = level;
-	}
+
 	
 	@Override
 	public int hashCode()
