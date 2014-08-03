@@ -37,7 +37,7 @@ public class ItemModifiedBow extends ItemBow implements IModifiable{
     		tag = stack.getTagCompound();
     	} 
     	else
-    		tag=new NBTTagCompound();
+    		tag = new NBTTagCompound();
     	if(tag.hasKey("modifiers"))
     	{
     		modifierStack.readFromNBT(tag.getTagList("modifiers", 0));
@@ -46,9 +46,8 @@ public class ItemModifiedBow extends ItemBow implements IModifiable{
     	modifierStack.addModifier(modifier);
     	tag.setTag("modifiers", modifierStack.writeToNBT(new NBTTagList()));
     	
-        
-        NBTTagCompound tmp = stack.getTagCompound();
-        stack.setTagCompound(tmp);
+
+        stack.setTagCompound(tag);
     }
 
     @Override
@@ -118,9 +117,7 @@ public class ItemModifiedBow extends ItemBow implements IModifiable{
             		NBTTagCompound tag = par1ItemStack.getTagCompound();
             		if(tag.hasKey("modifiers"))
             		{
-                        System.out.println("Using modifiers");
             		    ModifierStack modifiers = new ModifierStack();
-                        System.out.println(par1ItemStack.getTagCompound().getTag("modifiers"));
             		    modifiers.readFromNBT((NBTTagList) par1ItemStack.getTagCompound().getTag("modifiers"));
             		    modifiers.shootEntity(par1ItemStack, var8);
             		}

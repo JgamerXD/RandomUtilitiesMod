@@ -1,99 +1,125 @@
 package com.github.JgamerXD.RandomUtilitiesMod.TileEntities;
 
-import java.util.List;
-
 import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.IModifiable;
 import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierRecipe;
 import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierRegistry;
-
+import com.github.JgamerXD.RandomUtilitiesMod.Util;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityItemModifier extends TileEntity implements ISidedInventory, ICrafting
-{
-	private final int WORKING_TIME = 1;
+import java.util.Arrays;
 
-	private ItemStack inventory[];
+public class TileEntityItemModifier extends TileEntity implements ISidedInventory
+{
+	private final int WORKING_TIME = 100;
+
+	private ItemStack[] inventory;
 	// progress in remaining ticks
 	public int progress;
 	boolean active;
-	private String name;
+	private String name = "";
 
 	// ISidied stuff
 	private int[] input_top = { 4, 5 };
 	private int[] input_bottom = {};
 	private int[] input_sides = { 0, 1, 2, 3 };
 
-	ModifierRecipe[] current = new ModifierRecipe[4];
-	ModifierRecipe[] latest = new ModifierRecipe[4];
+	ModifierRecipe[] current;
+	ModifierRecipe[] latest;
 
 	public TileEntityItemModifier()
 	{
+        current = new ModifierRecipe[4];
+        latest = new ModifierRecipe[4];
 		inventory = new ItemStack[6];
 		active = false;
-		progress = 0;
+		progress = WORKING_TIME;
 	}
+
+
+    // Testing
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound tag = new NBTTagCompound();
+        this.writeToNBT(tag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+        readFromNBT(packet.func_148857_g());
+    }
+    // \Testing
 
 	public void updateEntity()
 	{
-		if (inventory[4] != null && inventory[5] != null)
-		{
-			latest = current;
-			updateCurrentRecipes();
-			if (active)
-			{
-				if (current.equals(latest))
-				{
-					progress--;
-					//System.out.println(progress);
-					if (progress == 0)
-					{
-						for (int i = 0; i < 3; i++)
-						{
-							Item modifiedItem = inventory[5].getItem();
-							if (modifiedItem instanceof IModifiable)
-							{
-								((IModifiable) modifiedItem).addModifier(inventory[5],ModifierRegistry.getResult(current[i]));
-							}
-							else
-							{
-                                modifiedItem = (Item) ModifierRegistry.getModifiable(modifiedItem);
-                                ItemStack modifiedStack = new ItemStack(modifiedItem,1,0);
-                                modifiedStack.setTagCompound(inventory[5].getTagCompound());
-                                ((IModifiable)modifiedStack.getItem()).addModifier(modifiedStack,ModifierRegistry.getResult(current[i]));
-                                inventory[5] = modifiedStack;
-							}
-                            current = null;
-							inventory[0]=null;
-							inventory[1]=null;
-							inventory[2]=null;
-							inventory[3]=null;
+        if (active && progress > 0) {
+        progress--;
+        }
+        if(!worldObj.isRemote) {
 
-						}
+            if (inventory[4] != null && inventory[5] != null) {
+                latest = current.clone();
+                updateCurrentRecipes();
+                if (active) {
+                    if (Arrays.equals(current, latest)) {
+                        //System.out.println(progress);
+                        if (progress <= 0) {
+                            for (int i = 0; i < 3; i++) {
+                                if (current[i] != null) {
+                                    Item modifiedItem = inventory[5].getItem();
+                                    if (modifiedItem instanceof IModifiable) {
+                                        ((IModifiable) modifiedItem).addModifier(inventory[5], ModifierRegistry.getResult(current[i]));
+                                    } else {
+                                        modifiedItem = (Item) ModifierRegistry.getModifiable(modifiedItem);
+                                        ItemStack modifiedStack = new ItemStack(modifiedItem, 1, 0);
+                                        modifiedStack.setTagCompound(inventory[5].getTagCompound());
+                                        ((IModifiable) modifiedStack.getItem()).addModifier(modifiedStack, ModifierRegistry.getResult(current[i]));
+                                        inventory[5] = modifiedStack;
+                                    }
+                                }
+                                current[0] = null;
+                                current[1] = null;
+                                current[2] = null;
+                                current[3] = null;
+                                inventory[0] = null;
+                                inventory[1] = null;
+                                inventory[2] = null;
+                                inventory[3] = null;
+
+
+                            }
+                            active = false;
+                            progress = WORKING_TIME;
+                            markDirty();
+                        }
+                    } else {
                         active = false;
-					}
-				}
-				else
-				{
-                    active = false;
-				}
+                        progress = WORKING_TIME;
+                        markDirty();
+                    }
 
-			}
-			if (active == false && validateCurrentRecipe())
-                if(!active) {
-                    active = true;
-                    progress = WORKING_TIME;
                 }
-		}
-        if(!active)
-            current = null;
+                if (!active && validateCurrentRecipes()) {
+                    active = true;
+                    markDirty();
+                }
+            }
+            if (!active) {
+                current[0] = null;
+                current[1] = null;
+                current[2] = null;
+                current[3] = null;
+            }
+        }
 	}
 
 	private void updateCurrentRecipes()
@@ -102,19 +128,19 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
         Item item = inventory[5].getItem();
         if(!(item instanceof IModifiable))
             item = (Item) ModifierRegistry.getModifiable(item);
-        for(int i=0;i<4;i++) {
-        	if(inventory[i].getItem() != null && inventory[i].stackSize > 0)
-        	{
-        		Item modifier = inventory[i].getItem();
-        		current[i] = new ModifierRecipe(modifier, focus, item);
-        	}
-            
-        }
+        for(int i=0;i<4;i++)
+            if (inventory[i] != null) {
+                //System.out.println(i);
+                Item modifier = inventory[i].getItem();
+                current[i] = new ModifierRecipe(modifier, focus, item);
+            }
 	}
 
-	private boolean validateCurrentRecipe()
+	private boolean validateCurrentRecipes()
 	{
 		boolean valid = true;
+        if (current[0] == null && current[1] == null && current[2] == null && current[3] == null)
+            valid = false;
 		
 		if (current[0] != null && !ModifierRegistry.isRecipe(current[0]) && inventory[0] != null)
 			valid = false;
@@ -169,10 +195,16 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 		return stack;
 	}
 
+    /*@Override
+    public void markDirty()
+    {
+        super.markDirty();
+    }*/
+
 	@Override
 	public String getInventoryName()
 	{
-		if (name != null)
+		if (name != "")
 			return name;
 		else
 			return "Bug";
@@ -198,8 +230,8 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 	@Override
 	public boolean hasCustomInventoryName()
 	{
-		return name != null && name.length() < 0;
-	}
+        return name != "";
+    }
 
 	@Override
 	public boolean isItemValidForSlot(int arg0, ItemStack arg1)
@@ -221,6 +253,7 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 		{
 			arg1.stackSize = getInventoryStackLimit();
 		}
+        markDirty();
 	}
 
 	public boolean isInvNameLocalized()
@@ -231,6 +264,8 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 	@Override
 	public void writeToNBT(NBTTagCompound par1)
 	{
+        par1.setInteger("progress", progress);
+        par1.setBoolean("active", active);
 		NBTTagList itemList = new NBTTagList();
 		for (int i = 0; i < inventory.length; i++)
 		{
@@ -243,13 +278,16 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 				itemList.appendTag(tag);
 			}
 		}
-		par1.setTag("Inventory", itemList);
+		par1.setTag("Items", itemList);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound par1)
 	{
-		NBTTagList tagList = par1.getTagList("Inventory", 0);
+        progress = par1.getInteger("progress");
+        active = par1.getBoolean("active");
+
+		NBTTagList tagList = par1.getTagList("Items", 0);
 		for (int i = 0; i < tagList.tagCount(); i++)
 		{
 			NBTTagCompound tag = tagList.getCompoundTagAt(i);
@@ -261,26 +299,6 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 		}
 	}
 
-	@Override
-	public void sendContainerAndContentsToPlayer(Container arg0, List arg1)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void sendProgressBarUpdate(Container arg0, int arg1, int arg2)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void sendSlotContents(Container arg0, int arg1, ItemStack arg2)
-	{
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public boolean canExtractItem(int arg0, ItemStack arg1, int arg2)
@@ -301,4 +319,9 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 	{
 		return arg0 == 0 ? input_bottom : (arg0 == 1 ? input_top : input_sides);
 	}
+
+    public int getScaledProgress(int scale)
+    {
+        return Util.getScaledProgress(scale,WORKING_TIME - progress,WORKING_TIME);
+    }
 }

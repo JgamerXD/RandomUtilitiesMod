@@ -1,14 +1,12 @@
 package com.github.JgamerXD.RandomUtilitiesMod.Modifiers;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 public class ModifierStack
 {
@@ -36,7 +34,7 @@ public class ModifierStack
 			NBTTagCompound var2 = par1NBTTagList.getCompoundTagAt(var1);
 			id = var2.getString("id");
 			level = var2.getInteger("level");
-            System.out.println("Detected modifier: "+id+" ("+level+")");
+            //System.out.println("Detected modifier: "+id+" ("+level+")");
 			modifiers.add(new ModifierInstance(ModifierRegistry.getModifier(id),level));
 		}
 	}
@@ -90,39 +88,26 @@ public class ModifierStack
 
     public boolean shootEntity(ItemStack par1ItemStack,Entity par2Entity)
     {
-        System.out.println("Shooting:");
-        for(ModifierInstance modifier : modifiers)
-        {
-            if(modifier.getModifier() instanceof IShootingModifier)
-                System.out.println(modifier.getModifier().getId());
-        }
-
-        System.out.println("    early:");
         for(ModifierInstance modifier : modifiers)
         {
 
             if(modifier.getModifier() instanceof IShootingModifier && ((IShootingModifier) modifier.getModifier()).getShootTime()==-1)
             {
-                System.out.println("        "+modifier.getModifier().getId());
                 ((IShootingModifier) modifier.getModifier()).shootEntity(modifier,par2Entity);
             }
         }
-        System.out.println("    normal:");
         for(ModifierInstance modifier : modifiers)
         {
 
             if(modifier.getModifier() instanceof IShootingModifier && ((IShootingModifier) modifier.getModifier()).getShootTime()==0)
             {
-                System.out.println("        "+modifier.getModifier().getId());
                 ((IShootingModifier) modifier.getModifier()).shootEntity(modifier,par2Entity);
             }
         }
-        System.out.println("    late:");
         for(ModifierInstance modifier : modifiers)
         {
             if(modifier.getModifier() instanceof IShootingModifier && ((IShootingModifier) modifier.getModifier()).getShootTime()==1)
             {
-                System.out.println("        "+modifier.getModifier().getId());
                 ((IShootingModifier) modifier.getModifier()).shootEntity(modifier,par2Entity);
             }
         }

@@ -6,10 +6,6 @@ import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierInstance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by JgamerXD on 11.06.2014.
@@ -29,16 +25,15 @@ public class ModifierMultiProjectile extends Modifier implements IShootingModifi
         double zCoord = par2Entity.posZ;
         float speed = 1;
 
-        double step = 2;
+        double step = 0.5;
         double phi = step;
 
-        System.out.println("Shooting multiple arrows!!");
 
-        for(int i=0;i < (par1ModifierInstance.getLevel()*3);i++)
+        for(int i=0;i < (par1ModifierInstance.getLevel()*8);i++)
         {
-            double r = 2;
-            float p = (float)(pitch + r * Math.cos(phi));
-            float y = (float)(yaw + r * Math.sin(phi));
+            double r = 1;
+            float p = (float)(pitch + (r + i / 2) * Math.cos(phi));
+            float y = (float)(yaw + (r + i / 2) * Math.sin(phi));
 
 
             phi += step;

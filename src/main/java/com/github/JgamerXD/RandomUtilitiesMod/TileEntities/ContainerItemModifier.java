@@ -1,13 +1,13 @@
 package com.github.JgamerXD.RandomUtilitiesMod.TileEntities;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerItemModifier extends Container
 {
@@ -27,7 +27,7 @@ public class ContainerItemModifier extends Container
         
         this.addSlotToContainer(new Slot(par2TileEntityItemModifier, 4, 84, 36));
         
-        this.addSlotToContainer(new Slot(par2TileEntityItemModifier, 5, 138, 36));
+        this.addSlotToContainer(new Slot(par2TileEntityItemModifier, 5, 139, 36));
         
         int i;
 
@@ -92,5 +92,6 @@ public class ContainerItemModifier extends Container
     {
         return null;
     }
+
 
 }

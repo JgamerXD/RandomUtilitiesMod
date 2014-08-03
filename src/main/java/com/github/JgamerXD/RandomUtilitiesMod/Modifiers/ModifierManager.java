@@ -11,7 +11,7 @@ public class ModifierManager {
     public static void registerModifriers()
     {
         Modifier multiProjectile = new ModifierMultiProjectile();
-        ModifierRegistry.registerRecipe(new ModifierInstance(multiProjectile,4),new ModifierRecipe(Items.arrow, RandomUtilitiesMod.multyArrow, RandomUtilitiesMod.modifiedBow));
+        ModifierRegistry.registerRecipe(new ModifierInstance(multiProjectile,1),new ModifierRecipe(Items.arrow, RandomUtilitiesMod.multiArrow, RandomUtilitiesMod.modifiedBow));
         ModifierRegistry.registerModifiable(Items.bow, (IModifiable) RandomUtilitiesMod.modifiedBow);
     }
 }

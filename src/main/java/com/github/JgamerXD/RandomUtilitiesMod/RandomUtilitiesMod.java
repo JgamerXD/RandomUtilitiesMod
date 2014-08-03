@@ -3,17 +3,12 @@ package com.github.JgamerXD.RandomUtilitiesMod;
 import com.github.JgamerXD.RandomUtilitiesMod.Blocks.BlockFlint;
 import com.github.JgamerXD.RandomUtilitiesMod.Blocks.BlockItemModifier;
 import com.github.JgamerXD.RandomUtilitiesMod.Blocks.BlockObsidianCrystal;
+import com.github.JgamerXD.RandomUtilitiesMod.Items.ItemArrowFocus;
 import com.github.JgamerXD.RandomUtilitiesMod.Items.ItemModifiedBow;
 import com.github.JgamerXD.RandomUtilitiesMod.Items.ItemModifierFocus;
-import com.github.JgamerXD.RandomUtilitiesMod.Items.ItemMultyArrowFocus;
 import com.github.JgamerXD.RandomUtilitiesMod.Items.ItemObsidianCrystal;
 import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierManager;
 import com.github.JgamerXD.RandomUtilitiesMod.TileEntities.TileEntityItemModifier;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -21,6 +16,10 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 
 @Mod(modid = RandomUtilitiesMod.modid, name = "RandomUtilities", version = "0.0")
@@ -44,7 +43,7 @@ public class RandomUtilitiesMod
 	    
 	    public static Item obsidianCrystal;
         public static Item modifiedBow;
-        public static Item multyArrow;
+        public static Item multiArrow;
 	    public static Item dagger;
         public static Item modifierFocus;
 
@@ -72,27 +71,37 @@ public class RandomUtilitiesMod
 	    	
 	    	obsidianCrystal = new ItemObsidianCrystal().setTextureName(modid +":" + "obsidian_crystal").setUnlocalizedName("obsidianCrystal");
             modifiedBow = new ItemModifiedBow().setUnlocalizedName("modifiedBow");
-            multyArrow = new ItemMultyArrowFocus().setTextureName(modid +":" + "multy_arrow_focus").setUnlocalizedName("multiArrow");
-            modifierFocus = new ItemModifierFocus().setTextureName(modid +":" + "focus_base").setUnlocalizedName("baseFocus");
+
 	    	
 	    	obsidianCrystalBlock = new BlockObsidianCrystal(Material.rock).setBlockTextureName(modid + ":" + "obsidian_crystal_block").setBlockName("obsidianCrystalBlock");
 	    	flintBlock = new BlockFlint(Material.rock).setBlockTextureName(modid + ":" + "flint_block").setBlockName("flintBlock");
 //	    	poisonBlock = new BlockPoison
-	    	itemModifier = new BlockItemModifier(Material.rock).setBlockName("itemModifier");
-	    	
-	    	
-	    	
-	    	GameRegistry.registerItem(obsidianCrystal, "obsidian_crystal", modid);
-	    	GameRegistry.registerItem(multyArrow, "multi_arrow", modid);
-	    	GameRegistry.registerItem(modifiedBow, "modified_bow", modid);
+	    	itemModifier = new BlockItemModifier(Material.rock).setBlockTextureName(modid + ":" + "modifier_side").setBlockName("itemModifier");
+
+
+
+            //Foci
+            modifierFocus = new ItemModifierFocus().setFocusName("empty").setUnlocalizedName("baseFocus");
+            multiArrow = new ItemArrowFocus().setFocusName("focus_arrow").setUnlocalizedName("arrowFocus");
+
+
             GameRegistry.registerItem(modifierFocus, "modifier_focus", modid);
-//	    	GameRegistry.registerItem(dagger, "dager_standard", modid);	    	
+            GameRegistry.registerItem(multiArrow, "multi_arrow", modid);
+
+
+
+	    	GameRegistry.registerItem(obsidianCrystal, "obsidian_crystal", modid);
+	    	GameRegistry.registerItem(modifiedBow, "modified_bow", modid);
+//	    	GameRegistry.registerItem(dagger, "dagger_standard", modid);
 	    	
 	    	GameRegistry.registerBlock(obsidianCrystalBlock, "obsidian_crystal_block");
 	    	GameRegistry.registerBlock(flintBlock, "flint_block");
 	    	GameRegistry.registerBlock(itemModifier, "item_modifier");
 //	    	GameRegistry.registerBlock(sugarBlock, "sugar_block");
 //	    	GameRegistry.registerBlock(poisonBlock, "poison_block");
+
+
+
 	    	
 	    	GameRegistry.registerTileEntity(TileEntityItemModifier.class, "ItemModifier");
 	    	
