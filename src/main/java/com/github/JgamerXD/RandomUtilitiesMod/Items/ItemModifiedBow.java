@@ -113,7 +113,6 @@ public class ItemModifiedBow extends ItemBow implements IModifiable{
             {
             	if(par1ItemStack.hasTagCompound())
             	{
-                    System.out.println("has tag");
             		NBTTagCompound tag = par1ItemStack.getTagCompound();
             		if(tag.hasKey("modifiers"))
             		{
