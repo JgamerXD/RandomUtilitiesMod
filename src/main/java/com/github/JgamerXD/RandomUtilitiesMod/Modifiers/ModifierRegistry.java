@@ -1,9 +1,9 @@
 package com.github.JgamerXD.RandomUtilitiesMod.Modifiers;
 
-import java.util.HashMap;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.HashMap;
 
 public class ModifierRegistry
 {
@@ -15,8 +15,9 @@ public class ModifierRegistry
 	
 	public static void registerModifer(Modifier modifier,String id)
 	{
-		if(modifiers.get(id) == null)
-			modifiers.put(id,modifier);
+		if(modifiers.get(id) == null) {
+            modifiers.put(id, modifier);
+        }
 		else
 			System.err.print("Could not register modifier: "+modifier.getClass()+" id already occupied");
 	}
@@ -55,8 +56,11 @@ public class ModifierRegistry
 
 	
 	public static ModifierInstance getResult(ModifierRecipe recipe)
-	{	
-		return (ModifierInstance) recipes.get(recipe);
+	{
+        ModifierInstance result;
+        result = (ModifierInstance) recipes.get(recipe);
+        System.out.println("Result: " + result);
+        return (ModifierInstance) recipes.get(recipe);
 	}
 
     public static IModifiable getModifiable(Item item)

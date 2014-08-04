@@ -2,11 +2,9 @@ package com.github.JgamerXD.RandomUtilitiesMod.Items;
 
 import com.github.JgamerXD.RandomUtilitiesMod.RandomUtilitiesMod;
 
-import net.minecraft.item.Item;
-
-public class ItemMultyArrowFocus extends Item
+public class ItemArrowFocus extends ItemModifierFocus
 {
-    public ItemMultyArrowFocus()
+    public ItemArrowFocus()
 	{
 		this.setCreativeTab(RandomUtilitiesMod.randomTab);
 	}

@@ -34,7 +34,11 @@ public class ModifierInstance
 		this.level = level;
 	}
 
-
+    @Override
+    public String toString()
+    {
+        return modifier.getId() + " lv:" + level;
+    }
 	
 	@Override
 	public int hashCode()
