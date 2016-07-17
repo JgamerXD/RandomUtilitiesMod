@@ -1,16 +1,15 @@
-package com.github.JgamerXD.RandomUtilitiesMod.TileEntities;
+package com.github.JgamerXD.RandomUtilitiesMod.client.gui;
 
-import com.github.JgamerXD.RandomUtilitiesMod.RandomUtilitiesMod;
+import com.github.JgamerXD.RandomUtilitiesMod.reference.Textures;
+import com.github.JgamerXD.RandomUtilitiesMod.tileEntities.TileEntityItemModifier;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class GuiItemModifier extends GuiContainer
 {
-	private static final ResourceLocation image = new ResourceLocation(RandomUtilitiesMod.modid + ":"
-			+ "textures/gui/item_modifier.png");
+
 	private TileEntityItemModifier itemModifier;
 
 	public GuiItemModifier(InventoryPlayer par1InventoryPlayer, TileEntityItemModifier par2TileEntityItemModifier)
@@ -37,7 +36,7 @@ public class GuiItemModifier extends GuiContainer
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(image);
+		this.mc.renderEngine.bindTexture(Textures.GUI_ITEM_MODIFIER);
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
@@ -48,5 +47,7 @@ public class GuiItemModifier extends GuiContainer
 		{
 			this.drawTexturedModalRect(k + 39, l + 16, 0, 166, i1, 55);
 		}
+
+        GUIHelper.drawLightBar(this, k+7, l+8, 1.0 / 3.0, 2.0 / 3.0);
 	}
 }

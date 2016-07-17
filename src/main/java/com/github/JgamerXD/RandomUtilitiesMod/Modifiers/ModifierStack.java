@@ -1,4 +1,4 @@
-package com.github.JgamerXD.RandomUtilitiesMod.Modifiers;
+package com.github.JgamerXD.RandomUtilitiesMod.modifiers;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

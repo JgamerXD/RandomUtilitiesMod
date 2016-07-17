@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "RandomUtilitiesMod",
+  "name": "Random Utilities Mod",
+  "description": "Utilities and light network",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authors": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authors": ["JgamerXD","xxchopper66"],
+  "credits": "",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

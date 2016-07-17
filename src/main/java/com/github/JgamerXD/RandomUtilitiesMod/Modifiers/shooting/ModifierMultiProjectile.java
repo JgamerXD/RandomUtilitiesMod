@@ -1,8 +1,8 @@
-package com.github.JgamerXD.RandomUtilitiesMod.Modifiers.shooting;
+package com.github.JgamerXD.RandomUtilitiesMod.modifiers.shooting;
 
-import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.IShootingModifier;
-import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.Modifier;
-import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierInstance;
+import com.github.JgamerXD.RandomUtilitiesMod.modifiers.IShootingModifier;
+import com.github.JgamerXD.RandomUtilitiesMod.modifiers.Modifier;
+import com.github.JgamerXD.RandomUtilitiesMod.modifiers.ModifierInstance;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.MathHelper;

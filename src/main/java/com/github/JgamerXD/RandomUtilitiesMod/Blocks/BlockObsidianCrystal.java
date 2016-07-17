@@ -1,4 +1,4 @@
-package com.github.JgamerXD.RandomUtilitiesMod.Blocks;
+package com.github.JgamerXD.RandomUtilitiesMod.blocks;
 
 import com.github.JgamerXD.RandomUtilitiesMod.RandomUtilitiesMod;
 

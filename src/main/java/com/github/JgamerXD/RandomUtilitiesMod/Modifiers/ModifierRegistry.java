@@ -1,4 +1,4 @@
-package com.github.JgamerXD.RandomUtilitiesMod.Modifiers;
+package com.github.JgamerXD.RandomUtilitiesMod.modifiers;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,7 +10,7 @@ public class ModifierRegistry
 	//focus , item
 	private static HashMap recipes = new HashMap<ModifierRecipe, ModifierInstance>();
 	private static HashMap modifiers = new HashMap<String,Modifier>();
-	private static HashMap modifiableItems = new HashMap<Item,IModifiable>();
+	private static HashMap modifiableItems = new HashMap<Item,IModifiableItem>();
 	
 	
 	public static void registerModifer(Modifier modifier,String id)
@@ -27,7 +27,7 @@ public class ModifierRegistry
 		return (Modifier) modifiers.get(id);
 	}
 	
-	public static void registerModifiable(Item item,IModifiable modifiable)
+	public static void registerModifiable(Item item,IModifiableItem modifiable)
 	{
 		modifiableItems.put(item,modifiable);
 	}
@@ -63,9 +63,9 @@ public class ModifierRegistry
         return (ModifierInstance) recipes.get(recipe);
 	}
 
-    public static IModifiable getModifiable(Item item)
+    public static IModifiableItem getModifiable(Item item)
     {
-        return (IModifiable) modifiableItems.get(item);
+        return (IModifiableItem) modifiableItems.get(item);
     }
 	
 	public static boolean isRecipe(ModifierRecipe recipe)

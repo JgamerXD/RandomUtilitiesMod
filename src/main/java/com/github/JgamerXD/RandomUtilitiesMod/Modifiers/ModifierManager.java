@@ -1,6 +1,6 @@
-package com.github.JgamerXD.RandomUtilitiesMod.Modifiers;
+package com.github.JgamerXD.RandomUtilitiesMod.modifiers;
 
-import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.shooting.ModifierMultiProjectile;
+import com.github.JgamerXD.RandomUtilitiesMod.modifiers.shooting.ModifierMultiProjectile;
 import com.github.JgamerXD.RandomUtilitiesMod.RandomUtilitiesMod;
 import net.minecraft.init.Items;
 
@@ -10,8 +10,12 @@ import net.minecraft.init.Items;
 public class ModifierManager {
     public static void registerModifriers()
     {
+        //Modifier name = new <modifierClass>();
+        //ModifierRegistry.registerRecipe(new ModifierInstance(name,level),new ModifierRecipe(Item, Focus, IModifiableItem));
+        //ModifierRegistry.registerModifiable(notModifiable, (IModifiable) IModifiableItem);
+
         Modifier multiProjectile = new ModifierMultiProjectile();
-        ModifierRegistry.registerRecipe(new ModifierInstance(multiProjectile,1),new ModifierRecipe(Items.arrow, RandomUtilitiesMod.multiArrow, RandomUtilitiesMod.modifiedBow));
-        ModifierRegistry.registerModifiable(Items.bow, (IModifiable) RandomUtilitiesMod.modifiedBow);
+        ModifierRegistry.registerRecipe(new ModifierInstance(multiProjectile,1),new ModifierRecipe(Items.arrow, RandomUtilitiesMod.arrowFocus, RandomUtilitiesMod.modifiedBow));
+        ModifierRegistry.registerModifiable(Items.bow, (IModifiableItem) RandomUtilitiesMod.modifiedBow);
     }
 }

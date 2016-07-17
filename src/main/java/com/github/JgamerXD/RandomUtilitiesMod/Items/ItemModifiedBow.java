@@ -1,8 +1,8 @@
 package com.github.JgamerXD.RandomUtilitiesMod.Items;
 
-import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.IModifiable;
-import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierInstance;
-import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierStack;
+import com.github.JgamerXD.RandomUtilitiesMod.modifiers.IModifiableItem;
+import com.github.JgamerXD.RandomUtilitiesMod.modifiers.ModifierInstance;
+import com.github.JgamerXD.RandomUtilitiesMod.modifiers.ModifierStack;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 /**
  * Created by JgamerXD on 11.06.2014.
  */
-public class ItemModifiedBow extends ItemBow implements IModifiable{
+public class ItemModifiedBow extends ItemBow implements IModifiableItem {
 
     public ModifierStack getModifierStack(ItemStack stack)
     {
@@ -32,23 +32,25 @@ public class ItemModifiedBow extends ItemBow implements IModifiable{
     public void addModifier(ItemStack stack,ModifierInstance modifier){
         ModifierStack modifierStack  = new ModifierStack();
         NBTTagCompound tag;
-    	if(stack.hasTagCompound())
-    	{
-    		tag = stack.getTagCompound();
-    	} 
-    	else
-    		tag = new NBTTagCompound();
-    	if(tag.hasKey("modifiers"))
-    	{
-    		modifierStack.readFromNBT(tag.getTagList("modifiers", 0));
+        if(stack.hasTagCompound())
+        {
+            tag = stack.getTagCompound();
+        }
+        else
+            tag = new NBTTagCompound();
+        if(tag.hasKey("modifiers"))
+        {
+            modifierStack.readFromNBT(tag.getTagList("modifiers", 0));
 
-    	}  
-    	modifierStack.addModifier(modifier);
-    	tag.setTag("modifiers", modifierStack.writeToNBT(new NBTTagList()));
-    	
+        }
+        modifierStack.addModifier(modifier);
+        tag.setTag("modifiers", modifierStack.writeToNBT(new NBTTagList()));
+
 
         stack.setTagCompound(tag);
     }
+
+
 
     @Override
     public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4)

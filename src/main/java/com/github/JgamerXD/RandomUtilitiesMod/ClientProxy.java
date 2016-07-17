@@ -4,8 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.github.JgamerXD.RandomUtilitiesMod.TileEntities.GuiItemModifier;
-import com.github.JgamerXD.RandomUtilitiesMod.TileEntities.TileEntityItemModifier;
+import com.github.JgamerXD.RandomUtilitiesMod.client.gui.GuiItemModifier;
+import com.github.JgamerXD.RandomUtilitiesMod.tileEntities.TileEntityItemModifier;
 
 public class ClientProxy extends CommonProxy
 {
@@ -19,8 +19,7 @@ public class ClientProxy extends CommonProxy
 		{
 		switch(ID)
 			{
-			case 0: 
-				System.out.println("Ho");
+			case 0:
 				return new GuiItemModifier(player.inventory, (TileEntityItemModifier) tileEntity);
 			}
 			

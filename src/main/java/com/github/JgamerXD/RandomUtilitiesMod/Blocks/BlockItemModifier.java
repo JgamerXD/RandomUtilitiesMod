@@ -1,10 +1,10 @@
-package com.github.JgamerXD.RandomUtilitiesMod.Blocks;
+package com.github.JgamerXD.RandomUtilitiesMod.blocks;
 
 
 import java.util.Random;
 
 import com.github.JgamerXD.RandomUtilitiesMod.RandomUtilitiesMod;
-import com.github.JgamerXD.RandomUtilitiesMod.TileEntities.TileEntityItemModifier;
+import com.github.JgamerXD.RandomUtilitiesMod.tileEntities.TileEntityItemModifier;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

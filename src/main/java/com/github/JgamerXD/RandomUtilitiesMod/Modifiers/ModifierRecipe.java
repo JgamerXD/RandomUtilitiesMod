@@ -1,7 +1,6 @@
-package com.github.JgamerXD.RandomUtilitiesMod.Modifiers;
+package com.github.JgamerXD.RandomUtilitiesMod.modifiers;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class ModifierRecipe
 {

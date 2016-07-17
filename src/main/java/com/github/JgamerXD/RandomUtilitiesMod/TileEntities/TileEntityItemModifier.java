@@ -1,9 +1,9 @@
-package com.github.JgamerXD.RandomUtilitiesMod.TileEntities;
+package com.github.JgamerXD.RandomUtilitiesMod.tileEntities;
 
-import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.IModifiable;
-import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierRecipe;
-import com.github.JgamerXD.RandomUtilitiesMod.Modifiers.ModifierRegistry;
-import com.github.JgamerXD.RandomUtilitiesMod.Util;
+import com.github.JgamerXD.RandomUtilitiesMod.modifiers.IModifiableItem;
+import com.github.JgamerXD.RandomUtilitiesMod.modifiers.ModifierRecipe;
+import com.github.JgamerXD.RandomUtilitiesMod.modifiers.ModifierRegistry;
+import com.github.JgamerXD.RandomUtilitiesMod.utility.Util;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -16,6 +16,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 import java.util.Arrays;
+
 
 public class TileEntityItemModifier extends TileEntity implements ISidedInventory
 {
@@ -76,13 +77,13 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
                             for (int i = 0; i < 3; i++) {
                                 if (current[i] != null) {
                                     Item modifiedItem = inventory[5].getItem();
-                                    if (modifiedItem instanceof IModifiable) {
-                                        ((IModifiable) modifiedItem).addModifier(inventory[5], ModifierRegistry.getResult(current[i]));
+                                    if (modifiedItem instanceof IModifiableItem) {
+                                        ((IModifiableItem) modifiedItem).addModifier(inventory[5], ModifierRegistry.getResult(current[i]));
                                     } else {
                                         modifiedItem = (Item) ModifierRegistry.getModifiable(modifiedItem);
                                         ItemStack modifiedStack = new ItemStack(modifiedItem, 1, 0);
                                         modifiedStack.setTagCompound(inventory[5].getTagCompound());
-                                        ((IModifiable) modifiedStack.getItem()).addModifier(modifiedStack, ModifierRegistry.getResult(current[i]));
+                                        ((IModifiableItem) modifiedStack.getItem()).addModifier(modifiedStack, ModifierRegistry.getResult(current[i]));
                                         inventory[5] = modifiedStack;
                                     }
                                 }
@@ -126,7 +127,7 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 	{
         Item focus = inventory[4].getItem();
         Item item = inventory[5].getItem();
-        if(!(item instanceof IModifiable))
+        if(!(item instanceof IModifiableItem))
             item = (Item) ModifierRegistry.getModifiable(item);
         for(int i=0;i<4;i++)
             if (inventory[i] != null) {
@@ -322,6 +323,6 @@ public class TileEntityItemModifier extends TileEntity implements ISidedInventor
 
     public int getScaledProgress(int scale)
     {
-        return Util.getScaledProgress(scale,WORKING_TIME - progress,WORKING_TIME);
+        return Util.getScaledAmount(scale, WORKING_TIME - progress, WORKING_TIME);
     }
 }

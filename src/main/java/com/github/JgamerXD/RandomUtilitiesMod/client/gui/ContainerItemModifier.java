@@ -1,5 +1,6 @@
-package com.github.JgamerXD.RandomUtilitiesMod.TileEntities;
+package com.github.JgamerXD.RandomUtilitiesMod.client.gui;
 
+import com.github.JgamerXD.RandomUtilitiesMod.tileEntities.TileEntityItemModifier;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;

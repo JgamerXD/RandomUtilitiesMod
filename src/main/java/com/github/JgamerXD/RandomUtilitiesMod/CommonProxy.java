@@ -1,7 +1,7 @@
 package com.github.JgamerXD.RandomUtilitiesMod;
 
-import com.github.JgamerXD.RandomUtilitiesMod.TileEntities.ContainerItemModifier;
-import com.github.JgamerXD.RandomUtilitiesMod.TileEntities.TileEntityItemModifier;
+import com.github.JgamerXD.RandomUtilitiesMod.client.gui.ContainerItemModifier;
+import com.github.JgamerXD.RandomUtilitiesMod.tileEntities.TileEntityItemModifier;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -27,8 +27,7 @@ public class CommonProxy implements IGuiHandler
 		{
 		switch(ID)
 			{
-			case 0: 
-				System.out.println("Hi");
+			case 0:
 				return new ContainerItemModifier(player.inventory, (TileEntityItemModifier) tileEntity);
 			}
 			
