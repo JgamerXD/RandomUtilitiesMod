@@ -1,0 +1,40 @@
+#######################################
+#CreativeTabs
+#######################################
+itemGroup.randomutilities=Random Utilities
+
+
+#######################################
+#Items
+#######################################
+item.randomutilities:poser.name=Poser
+item.randomutilities:equiper.name=Poser
+item.randomutilities:obsidian_crystal.name=Obsidian Crystal
+
+
+#######################################
+#Blocks
+#######################################
+tile.randomutilities:flint_block.name=Block of Flint
+tile.randomutilities:sugar_block.name=Block of Sugar
+tile.randomutilities:poison_block.name=Block of Spider's Eyes
+tile.randomutilities:obsidian_crystal_block.name=Obsidian Crystal Block
+
+#######################################
+#GUI
+#######################################
+gui.poser.head=Head
+gui.poser.body=Body
+gui.poser.leftarm=Left Arm
+gui.poser.rightarm=Right Arm
+gui.poser.leftleg=Left Leg
+gui.poser.rightleg=Right Leg
+gui.poser.gui=Display Rotation
+
+#######################################
+#Chat
+#######################################
+chat.randomutilities:poser.paste=Pasted Pose
+chat.randomutilities:poser.copy=Copied Pose
+chat.randomutilities:poser.clear=Cleared Pose
+chat.randomutilities:poser.error=Something went wrong! Look at the log for more information.
