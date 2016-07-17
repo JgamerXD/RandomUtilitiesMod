@@ -1,6 +1,7 @@
 package com.github.jgamerXD.randomUtilities.gui;
 
 
+import com.github.jgamerXD.randomUtilities.RandomUtilitiesMod;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,8 +10,8 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiTest extends GuiContainer
 {
-	private static final ResourceLocation image = new ResourceLocation(/*RandomUtilitiesMod.MODID + ":"
-			+*/ "textures/gui/demo_background.png");
+	private static final ResourceLocation image = new ResourceLocation(RandomUtilitiesMod.MODID,/* + ":"
+			+*/ "/gui/demo_background.png");
 	//private TileEntityItemModifier itemModifier;
 	private String text;
 

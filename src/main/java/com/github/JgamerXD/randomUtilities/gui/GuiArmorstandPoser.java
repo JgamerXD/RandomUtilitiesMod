@@ -67,7 +67,7 @@ public class GuiArmorstandPoser extends GuiScreen implements GuiPageButtonList.G
     //ContainerArmorEquiper containerArmorPoser
 
 
-    public GuiArmorstandPoser(InventoryPlayer inventoryPlayer, EntityArmorStand armorStand) {
+    public GuiArmorstandPoser(EntityArmorStand armorStand) {
         //super(new ContainerArmorEquiper(inventoryPlayer, armorStand));
         super();
         this.armorStand = armorStand;
@@ -152,12 +152,12 @@ public class GuiArmorstandPoser extends GuiScreen implements GuiPageButtonList.G
         this.fontRendererObj.drawStringWithShadow(name, (xoff+326)/2 - this.fontRendererObj.getStringWidth(name)/2, (yoff + 18)/2, 0xFFFFFF);
         GlStateManager.popMatrix();
 
-        drawString(fontRendererObj,I18n.format("gui.poser.body"),       xoff+2,      yoff-2+18,0xffffff);
-        drawString(fontRendererObj,I18n.format("gui.poser.head"),       xoff+2+133,  yoff-2+18,0xffffff);
-        drawString(fontRendererObj,I18n.format("gui.poser.rightarm"),    xoff+2,      yoff-2+96,0xffffff);
-        drawString(fontRendererObj,I18n.format("gui.poser.leftarm"),   xoff+2+133,  yoff-2+96,0xffffff);
-        drawString(fontRendererObj,I18n.format("gui.poser.rightleg"),    xoff+2,      yoff-2+174,0xffffff);
-        drawString(fontRendererObj,I18n.format("gui.poser.leftleg"),   xoff+2+133,  yoff-2+174,0xffffff);
+        drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.body"),          xoff+2,      yoff-2+18,0xffffff);
+        drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.head"),          xoff+2+133,  yoff-2+18,0xffffff);
+        drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.rightarm"),      xoff+2,      yoff-2+96,0xffffff);
+        drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.leftarm"),       xoff+2+133,  yoff-2+96,0xffffff);
+        drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.rightleg"),      xoff+2,      yoff-2+174,0xffffff);
+        drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.leftleg"),       xoff+2+133,  yoff-2+174,0xffffff);
 
         
 

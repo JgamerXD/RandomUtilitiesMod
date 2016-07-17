@@ -1,8 +1,8 @@
 [
 {
-  "modid": "randomUtilitiesMod",
-  "name": "Armor stand poser",
-  "description": "Allows to easily pose armor stands.",
+  "modid": "randomUtilities",
+  "name": "Random Utilitits Mod",
+  "description": "Some stuff including armorstand posing.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

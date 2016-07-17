@@ -23,18 +23,18 @@ tile.randomutilities:obsidian_crystal_block.name=Obsidian Crystal Block
 #######################################
 #GUI
 #######################################
-gui.poser.head=Head
-gui.poser.body=Body
-gui.poser.leftarm=Left Arm
-gui.poser.rightarm=Right Arm
-gui.poser.leftleg=Left Leg
-gui.poser.rightleg=Right Leg
-gui.poser.gui=Display Rotation
+gui.randomUtilities.poser.head=Head
+gui.randomUtilities.poser.body=Body
+gui.randomUtilities.poser.leftarm=Left Arm
+gui.randomUtilities.poser.rightarm=Right Arm
+gui.randomUtilities.poser.leftleg=Left Leg
+gui.randomUtilities.poser.rightleg=Right Leg
+gui.randomUtilities.poser.gui=Display Rotation
 
 #######################################
 #Chat
 #######################################
-chat.randomutilities:poser.paste=Pasted Pose
-chat.randomutilities:poser.copy=Copied Pose
-chat.randomutilities:poser.clear=Cleared Pose
-chat.randomutilities:poser.error=Something went wrong! Look at the log for more information.
+chat.randomUtilities.poser.paste=Pasted Pose
+chat.randomUtilities.poser.copy=Copied Pose
+chat.randomUtilities.poser.clear=Cleared Pose
+chat.randomUtilities.poser.error=Something went wrong! Look at the log for more information.

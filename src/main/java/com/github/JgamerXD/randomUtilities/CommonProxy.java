@@ -18,7 +18,7 @@ public class CommonProxy implements IGuiHandler
 
 	public EntityPlayer getPlayerFromContext(MessageContext ctx)
 	{
-		return ctx.side == Side.SERVER? ctx.getServerHandler().playerEntity: Minecraft.getMinecraft().thePlayer;
+		return ctx.side == Side.SERVER? ctx.getServerHandler().playerEntity: null;//Minecraft.getMinecraft().thePlayer;
 	}
 
 	@Override
