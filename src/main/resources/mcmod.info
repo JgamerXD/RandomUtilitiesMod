@@ -1,6 +1,6 @@
 [
 {
-  "modid": "randomUtilities",
+  "modid": "randomutilities",
   "name": "Random Utilitits Mod",
   "description": "Some stuff including armorstand posing.",
   "version": "${version}",

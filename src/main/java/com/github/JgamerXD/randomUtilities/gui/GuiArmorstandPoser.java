@@ -36,22 +36,23 @@ public class GuiArmorstandPoser extends GuiScreen implements GuiPageButtonList.G
 
 
     public static final int SLIDER_GUI_ROTATION = 0;
-    public static final int SLIDER_BODY         = 1;
-    public static final int SLIDER_HEAD_X       = 2;
-    public static final int SLIDER_HEAD_Y       = 3;
-    public static final int SLIDER_HEAD_Z       = 4;
-    public static final int SLIDER_ARM_RIGHT_X  = 5;
-    public static final int SLIDER_ARM_RIGHT_Y  = 6;
-    public static final int SLIDER_ARM_RIGHT_Z  = 7;
-    public static final int SLIDER_ARM_LEFT_X   = 8;
-    public static final int SLIDER_ARM_LEFT_Y   = 9;
-    public static final int SLIDER_ARM_LEFT_Z   = 10;
-    public static final int SLIDER_LEG_RIGHT_X  = 11;
-    public static final int SLIDER_LEG_RIGHT_Y  = 12;
-    public static final int SLIDER_LEG_RIGHT_Z  = 13;
-    public static final int SLIDER_LEG_LEFT_X   = 14;
-    public static final int SLIDER_LEG_LEFT_Y   = 15;
-    public static final int SLIDER_LEG_LEFT_Z   = 16;
+    public static final int SLIDER_ENTITY       = 1;
+    public static final int SLIDER_BODY         = 2;
+    public static final int SLIDER_HEAD_X       = 3;
+    public static final int SLIDER_HEAD_Y       = 4;
+    public static final int SLIDER_HEAD_Z       = 5;
+    public static final int SLIDER_ARM_RIGHT_X  = 6;
+    public static final int SLIDER_ARM_RIGHT_Y  = 7;
+    public static final int SLIDER_ARM_RIGHT_Z  = 8;
+    public static final int SLIDER_ARM_LEFT_X   = 9;
+    public static final int SLIDER_ARM_LEFT_Y   = 10;
+    public static final int SLIDER_ARM_LEFT_Z   = 11;
+    public static final int SLIDER_LEG_RIGHT_X  = 12;
+    public static final int SLIDER_LEG_RIGHT_Y  = 13;
+    public static final int SLIDER_LEG_RIGHT_Z  = 14;
+    public static final int SLIDER_LEG_LEFT_X   = 15;
+    public static final int SLIDER_LEG_LEFT_Y   = 16;
+    public static final int SLIDER_LEG_LEFT_Z   = 17;
 
 
     EntityArmorStand armorStand;
@@ -85,7 +86,8 @@ public class GuiArmorstandPoser extends GuiScreen implements GuiPageButtonList.G
 
 
         buttonList.add(new GuiSlider(this,SLIDER_GUI_ROTATION ,xoff + 266   ,yoff + 203      ,"gui_rot"  ,-180.0f ,180.0f,18,this));
-        buttonList.add(new GuiSlider(this,SLIDER_BODY         ,xoff         ,yoff + 26       ,"body"     ,-180.0f ,180.0f,armorStand.getBodyRotation().getY(),this));
+        buttonList.add(new GuiSlider(this,SLIDER_ENTITY       ,xoff         ,yoff + 26       ,"entity"   ,-180.0f ,180.0f,armorStand.rotationYaw,this));
+        buttonList.add(new GuiSlider(this,SLIDER_BODY         ,xoff         ,yoff + 26 + 42   ,"body"     ,-180.0f ,180.0f,armorStand.getBodyRotation().getY(),this));
         buttonList.add(new GuiSlider(this,SLIDER_HEAD_X       ,xoff + 133   ,yoff + 26       ,"head_x"   ,-180.0f ,180.0f,armorStand.getHeadRotation().getX(),this));
         buttonList.add(new GuiSlider(this,SLIDER_HEAD_Y       ,xoff + 133   ,yoff + 26 + 21  ,"head_y"   ,-180.0f ,180.0f,armorStand.getHeadRotation().getY(),this));
         buttonList.add(new GuiSlider(this,SLIDER_HEAD_Z       ,xoff + 133   ,yoff + 26 + 42  ,"head_z"   ,-180.0f ,180.0f,armorStand.getHeadRotation().getZ(),this));
@@ -152,15 +154,27 @@ public class GuiArmorstandPoser extends GuiScreen implements GuiPageButtonList.G
         this.fontRendererObj.drawStringWithShadow(name, (xoff+326)/2 - this.fontRendererObj.getStringWidth(name)/2, (yoff + 18)/2, 0xFFFFFF);
         GlStateManager.popMatrix();
 
-        drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.body"),          xoff+2,      yoff-2+18,0xffffff);
+        drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.entity"),        xoff+2,      yoff-2+18,0xffffff);
+        drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.body"),          xoff+2,      yoff-2+60,0xffffff);
         drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.head"),          xoff+2+133,  yoff-2+18,0xffffff);
         drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.rightarm"),      xoff+2,      yoff-2+96,0xffffff);
         drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.leftarm"),       xoff+2+133,  yoff-2+96,0xffffff);
         drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.rightleg"),      xoff+2,      yoff-2+174,0xffffff);
         drawString(fontRendererObj,I18n.format("gui." + RandomUtilitiesMod.MODID + ".poser.leftleg"),       xoff+2+133,  yoff-2+174,0xffffff);
 
-        
-
+        //Entity rotation markers
+        GlStateManager.pushMatrix();
+        {
+            int xStart = (int)(xoff*2);
+            int yStart = (int)((yoff+26+11)*2 - this.fontRendererObj.FONT_HEIGHT/2.0);
+            GlStateManager.scale(0.5, 0.5, 1);
+            drawString(fontRendererObj,"N", xStart+5, yStart,0xd0d0d0);
+            drawString(fontRendererObj,"E", xStart+67-this.fontRendererObj.getStringWidth("E"),  yStart,0xeeeeee);
+            drawString(fontRendererObj,"S", xStart+123-this.fontRendererObj.getStringWidth("S"), yStart,0xeeeeee);
+            drawString(fontRendererObj,"W", xStart+179-this.fontRendererObj.getStringWidth("W"), yStart,0xeeeeee);
+            drawString(fontRendererObj,"N", xStart+235-this.fontRendererObj.getStringWidth("N"), yStart,0xeeeeee);
+        }
+        GlStateManager.popMatrix();
 
         //Render Crosshair
         GlStateManager.pushMatrix();
@@ -255,6 +269,10 @@ public class GuiArmorstandPoser extends GuiScreen implements GuiPageButtonList.G
         switch (id) {
             case SLIDER_GUI_ROTATION: {
                 guiRotation = value;
+                break;
+            }
+            case SLIDER_ENTITY: {
+                armorStand.rotationYaw = value;
                 break;
             }
             case SLIDER_BODY: {
@@ -390,6 +408,11 @@ public class GuiArmorstandPoser extends GuiScreen implements GuiPageButtonList.G
             }
             return String.format("%s: %5.3f§r",text,value);
 
+        }
+        else if(id == SLIDER_ENTITY)
+        {
+
+            return "";
         }
         else
             return String.format("%5.3f",value);

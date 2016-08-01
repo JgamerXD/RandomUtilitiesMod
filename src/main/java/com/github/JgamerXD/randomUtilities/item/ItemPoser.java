@@ -3,6 +3,7 @@ package com.github.jgamerXD.randomUtilities.item;
 import com.github.jgamerXD.randomUtilities.RandomUtilitiesMod;
 import com.github.jgamerXD.randomUtilities.gui.GuiArmorstandPoser;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -13,12 +14,15 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Level;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 
 /**
@@ -32,11 +36,13 @@ public class ItemPoser extends Item {
 
     static {
         try {
-            writeNBTPose = EntityArmorStand.class.getDeclaredMethod("readPoseFromNBT");
-            writeNBTPose.setAccessible(true);
-            readNBTPose = EntityArmorStand.class.getDeclaredMethod("writePoseToNBT", NBTTagCompound.class);
-            readNBTPose.setAccessible(true);
-        } catch (NoSuchMethodException e) {
+            writeNBTPose = ReflectionHelper.findMethod(EntityArmorStand.class,null,new String[]{"func_175419_y","readPoseFromNBT"},null);
+            //writeNBTPose = EntityArmorStand.class.getDeclaredMethod("readPoseFromNBT");
+            //writeNBTPose.setAccessible(true);
+            readNBTPose = ReflectionHelper.findMethod(EntityArmorStand.class,null,new String[]{"func_175416_h","writePoseToNBT"},NBTTagCompound.class);
+//            readNBTPose = EntityArmorStand.class.getDeclaredMethod("writePoseToNBT", NBTTagCompound.class);
+//            readNBTPose.setAccessible(true);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -53,6 +59,13 @@ public class ItemPoser extends Item {
         stack.setTagCompound(new NBTTagCompound());
     }
 
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4)
+    {
+        list.add(I18n.format("tooltip.randomutilities.poser.1"));
+        list.add(stack.hasTagCompound() && stack.getTagCompound().getBoolean("Paste") ? I18n.format("tooltip.randomutilities.poser.2.paste"):I18n.format("tooltip.randomutilities.poser.2.copy"));
+    }
 
 
     @Override

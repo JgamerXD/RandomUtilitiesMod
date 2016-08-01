@@ -5,6 +5,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.lang.reflect.InvocationTargetException;
@@ -14,16 +15,7 @@ import java.lang.reflect.Method;
  * Created by Janki on 16.07.2016.
  */
 public class RandomEventHandler {
-    private static Method setShowArmsMethod;
-
-    static {
-        try {
-            setShowArmsMethod = EntityArmorStand.class.getDeclaredMethod("setShowArms", boolean.class);
-            setShowArmsMethod.setAccessible(true);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-    }
+    private static Method setShowArmsMethod = ReflectionHelper.findMethod(EntityArmorStand.class,null,new String[]{"func_175413_k","setShowArms"},boolean.class);
 
     @SubscribeEvent
     public void interactSpecific(PlayerInteractEvent.EntityInteractSpecific evt) throws InvocationTargetException, IllegalAccessException {

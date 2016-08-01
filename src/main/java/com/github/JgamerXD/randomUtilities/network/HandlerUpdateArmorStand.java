@@ -13,6 +13,7 @@ public class HandlerUpdateArmorStand implements IMessageHandler<PacketUpdateArmo
     @Override
     public IMessage onMessage(PacketUpdateArmorStand message, MessageContext ctx) {
         EntityArmorStand armorStand = (EntityArmorStand) RandomUtilitiesMod.proxy.getPlayerFromContext(ctx).worldObj.getEntityByID(message.entityID);
+        armorStand.rotationYaw = message.rotation;
         armorStand.setHeadRotation(message.head);
         armorStand.setBodyRotation(message.body);
         armorStand.setLeftArmRotation(message.arm_l);

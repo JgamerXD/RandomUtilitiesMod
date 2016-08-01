@@ -50,9 +50,9 @@ public class CraftingManager {
 			"XXX",
 			"XXX",
 			"XXX",
-			'X', Items.SUGAR);
+			'X', RandomUtilitiesMod.obsidianCrystal);
 
-		GameRegistry.addShapelessRecipe(new ItemStack(Items.SUGAR,9,0),RandomUtilitiesMod.itemSugarblock);
+		GameRegistry.addShapelessRecipe(new ItemStack(RandomUtilitiesMod.obsidianCrystal,9,0),RandomUtilitiesMod.itemObsidianCrystalBlock);
 	}
 
 

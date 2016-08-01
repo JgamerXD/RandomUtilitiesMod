@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 public class PacketUpdateArmorStand implements IMessage {
 
     public int entityID = 0;
+    public float rotation = 0;
     public Rotations head = new Rotations(0,0,0);
     public Rotations body = new Rotations(0,0,0);
     public Rotations arm_r = new Rotations(0,0,0);
@@ -26,6 +27,7 @@ public class PacketUpdateArmorStand implements IMessage {
     }
 
     public PacketUpdateArmorStand(EntityArmorStand armorStand) {
+        rotation = armorStand.rotationYaw;
         entityID = armorStand.getEntityId();
         head = armorStand.getHeadRotation();
         body = armorStand.getBodyRotation();
@@ -39,7 +41,7 @@ public class PacketUpdateArmorStand implements IMessage {
     @Override
     public void fromBytes(ByteBuf buf) {
         entityID = buf.readInt();
-
+        rotation = buf.readFloat();
         head = new Rotations(buf.readFloat(),buf.readFloat(),buf.readFloat());
         body = new Rotations(buf.readFloat(),buf.readFloat(),buf.readFloat());
         arm_l = new Rotations(buf.readFloat(),buf.readFloat(),buf.readFloat());
@@ -51,6 +53,8 @@ public class PacketUpdateArmorStand implements IMessage {
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeInt(entityID);
+
+        buf.writeFloat(rotation);
 
         buf.writeFloat(head.getX());
         buf.writeFloat(head.getY());

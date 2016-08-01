@@ -20,21 +20,32 @@ tile.randomutilities:sugar_block.name=Block of Sugar
 tile.randomutilities:poison_block.name=Block of Spider's Eyes
 tile.randomutilities:obsidian_crystal_block.name=Obsidian Crystal Block
 
+
+#######################################
+#Tooltips
+#######################################
+tooltip.randomutilities.poser.1=Rightclick armorstand to open GUI
+tooltip.randomutilities.poser.2.copy=Sneak and rightclick to copy Pose
+tooltip.randomutilities.poser.2.paste=Sneak and rightclick to paste Pose
+
+
 #######################################
 #GUI
 #######################################
-gui.randomUtilities.poser.head=Head
-gui.randomUtilities.poser.body=Body
-gui.randomUtilities.poser.leftarm=Left Arm
-gui.randomUtilities.poser.rightarm=Right Arm
-gui.randomUtilities.poser.leftleg=Left Leg
-gui.randomUtilities.poser.rightleg=Right Leg
-gui.randomUtilities.poser.gui=Display Rotation
+gui.randomutilities.poser.entity=Entity rotation
+gui.randomutilities.poser.head=Head
+gui.randomutilities.poser.body=Body
+gui.randomutilities.poser.leftarm=Left Arm
+gui.randomutilities.poser.rightarm=Right Arm
+gui.randomutilities.poser.leftleg=Left Leg
+gui.randomutilities.poser.rightleg=Right Leg
+gui.randomutilities.poser.gui=Display Rotation
+
 
 #######################################
 #Chat
 #######################################
-chat.randomUtilities.poser.paste=Pasted Pose
-chat.randomUtilities.poser.copy=Copied Pose
-chat.randomUtilities.poser.clear=Cleared Pose
-chat.randomUtilities.poser.error=Something went wrong! Look at the log for more information.
+chat.randomutilities.poser.paste=Pasted Pose
+chat.randomutilities.poser.copy=Copied Pose
+chat.randomutilities.poser.clear=Cleared Pose
+chat.randomutilities.poser.error=Something went wrong! Look at the log for more information.
