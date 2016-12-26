@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=down":  { "model": "randomutilities:portable_button_temp_block"},
+    "facing=up":    { "model": "randomutilities:portable_button_temp_block"},
+    "facing=north": { "model": "randomutilities:portable_button_temp_block"},
+    "facing=south": { "model": "randomutilities:portable_button_temp_block"},
+    "facing=west":  { "model": "randomutilities:portable_button_temp_block"},
+    "facing=east":  { "model": "randomutilities:portable_button_temp_block"}
+  }
+}
