@@ -2,7 +2,6 @@ package jgamerXD.randomUtilities;
 
 import jgamerXD.randomUtilities.block.*;
 import jgamerXD.randomUtilities.entity.EntityCursedSnowball;
-import jgamerXD.randomUtilities.entity.RenderCursedSnowball;
 import jgamerXD.randomUtilities.item.ItemPortableButton;
 import jgamerXD.randomUtilities.item.ItemObsidianCrystal;
 import jgamerXD.randomUtilities.item.ItemPoser;
@@ -12,10 +11,8 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -27,9 +24,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
 
 
 @Mod(modid = RandomUtilitiesMod.MODID, version = RandomUtilitiesMod.VERSION)
@@ -52,6 +47,7 @@ public class RandomUtilitiesMod {
     public static Block flintblock;
     public static Block poisonblock;
     public static Block sugarblock;
+    public static Block glowsand;
     public static Block obsidianCrystalBlock;
     public static Block portableButtonTempBlock;
     /**
@@ -60,6 +56,7 @@ public class RandomUtilitiesMod {
     public static Item itemFlintblock;
     public static Item itemPoisonblock;
     public static Item itemSugarblock;
+    public static Item itemGlowsand;
     public static Item itemObsidianCrystalBlock;
     /**
      * Items
@@ -142,6 +139,9 @@ public class RandomUtilitiesMod {
         sugarblock = RegisterHelper.registerBlock(new BlockSugar(), "sugar_block");
         itemSugarblock = RegisterHelper.registerBlockItem(sugarblock);
 
+        glowsand = RegisterHelper.registerBlock(new BlockGlowingSand(), "glowsand");
+        itemGlowsand = RegisterHelper.registerBlockItem(glowsand);
+
 
         obsidianCrystalBlock = RegisterHelper.registerBlock(new BlockObsidianCrystal(), "obsidian_crystal_block");
         itemObsidianCrystalBlock = RegisterHelper.registerBlockItem(obsidianCrystalBlock);
@@ -149,7 +149,10 @@ public class RandomUtilitiesMod {
 
     private void initEntities() {
         EntityRegistry.registerModEntity(EntityCursedSnowball.class, "cursed_snowball", 0, this, 64, 1, false, 0x98EAE1, 0xB1D4F9);
-        RenderingRegistry.registerEntityRenderingHandler(EntityCursedSnowball.class, RenderCursedSnowball::new);
+
+
+
+        proxy.registerRendering();
     }
 
     private void initSpawns() {

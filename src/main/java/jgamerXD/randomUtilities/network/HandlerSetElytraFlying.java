@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class HandlerSetElytraFlying implements IMessageHandler<PacketSetElytraFlying, IMessage> {
     @Override
     public IMessage onMessage(PacketSetElytraFlying message, MessageContext ctx) {
-        Entity entity = RandomUtilitiesMod.proxy.getPlayerFromContext(ctx).worldObj.getEntityByID(message.entityID);
+        Entity entity = RandomUtilitiesMod.proxy.getPlayerFromContext(ctx).world.getEntityByID(message.entityID);
         if(entity != null && entity instanceof EntityPlayerMP)
             ((EntityPlayerMP) entity).setElytraFlying();
         return null;

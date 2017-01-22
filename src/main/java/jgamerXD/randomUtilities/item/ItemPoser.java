@@ -46,7 +46,7 @@ public class ItemPoser extends Item {
 
     static {
         try {
-            writeNBTPose = ReflectionHelper.findMethod(EntityArmorStand.class, null, new String[]{"func_175419_y", "readPoseFromNBT"}, null);
+            writeNBTPose = ReflectionHelper.findMethod(EntityArmorStand.class, null, new String[]{"func_175419_y", "readPoseFromNBT"});
             //writeNBTPose = EntityArmorStand.class.getDeclaredMethod("readPoseFromNBT");
             //writeNBTPose.setAccessible(true);
             readNBTPose = ReflectionHelper.findMethod(EntityArmorStand.class, null, new String[]{"func_175416_h", "writePoseToNBT"}, NBTTagCompound.class);
@@ -107,7 +107,7 @@ public class ItemPoser extends Item {
                 && evt.getTarget() instanceof EntityArmorStand
                 && evt.getItemStack().getItem() == this) {
             if (evt.getEntityPlayer().isSneaking()) {
-                if (!player.worldObj.isRemote) {
+                if (!player.world.isRemote) {
                     if (!evt.getItemStack().hasTagCompound())
                         evt.getItemStack().setTagCompound(new NBTTagCompound());
                     NBTTagCompound isComp = evt.getItemStack().getTagCompound();
@@ -118,30 +118,30 @@ public class ItemPoser extends Item {
                         try {
                             readNBTPose.invoke(evt.getTarget(), isComp.getCompoundTag("Pose"));
                             isComp.setBoolean("Paste", false);
-                            evt.getEntityPlayer().addChatComponentMessage(new TextComponentTranslation("chat." + RandomUtilitiesMod.MODID + ".poser.paste"));
+                            evt.getEntityPlayer().sendStatusMessage(new TextComponentTranslation("chat." + RandomUtilitiesMod.MODID + ".poser.paste"));
 
                         } catch (Exception e) {
                             FMLLog.log(Level.ERROR, "Error while pasting pose with %s!", evt.getItemStack().getUnlocalizedName());
                             e.printStackTrace();
-                            evt.getEntityPlayer().addChatComponentMessage(new TextComponentTranslation("chat." + RandomUtilitiesMod.MODID + ".poser.error"));
+                            evt.getEntityPlayer().sendStatusMessage(new TextComponentTranslation("chat." + RandomUtilitiesMod.MODID + ".poser.error"));
 
                         }
                     } else { //Copy
                         try {
                             isComp.setTag("Pose", (NBTTagCompound) writeNBTPose.invoke(evt.getTarget()));
                             isComp.setBoolean("Paste", true);
-                            evt.getEntityPlayer().addChatComponentMessage(new TextComponentTranslation("chat." + RandomUtilitiesMod.MODID + ".poser.copy"));
+                            evt.getEntityPlayer().sendStatusMessage(new TextComponentTranslation("chat." + RandomUtilitiesMod.MODID + ".poser.copy"));
 
 
                         } catch (Exception e) {
                             FMLLog.log(Level.ERROR, "Error while copying pose with %s!", evt.getItemStack().getUnlocalizedName());
                             e.printStackTrace();
-                            evt.getEntityPlayer().addChatComponentMessage(new TextComponentTranslation("chat." + RandomUtilitiesMod.MODID + ".poser.error"));
+                            evt.getEntityPlayer().sendStatusMessage(new TextComponentTranslation("chat." + RandomUtilitiesMod.MODID + ".poser.error"));
                         }
                     }
                     evt.getItemStack().setTagCompound(isComp);
                 }
-            } else if (player.worldObj.isRemote) {
+            } else if (player.world.isRemote) {
                 //player.openGui(RandomUtilitiesMod.instance,0,player.worldObj,(int)player.posX,(int)player.posY,(int)player.posZ);
                 openPoserGui((EntityArmorStand) evt.getTarget());
             }

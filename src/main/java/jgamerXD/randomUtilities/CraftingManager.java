@@ -9,11 +9,11 @@ public class CraftingManager {
 	public static void load()
 	{
 		GameRegistry.addRecipe(new ItemStack(RandomUtilitiesMod.poser, 1, 0),
-			"YXY",
-			"XYX",
-			"XYX",
-			'X', Items.STRING,
-			'Y', Items.STICK);
+				"YXY",
+				"XYX",
+				"XYX",
+				'X', Items.STRING,
+				'Y', Items.STICK);
 
 		GameRegistry.addRecipe(new ItemStack(RandomUtilitiesMod.portableButton, 1, 0),
 				" X ",
@@ -61,12 +61,14 @@ public class CraftingManager {
 				'Y', Items.DIAMOND);
 
 		GameRegistry.addRecipe(new ItemStack(RandomUtilitiesMod.obsidianCrystalBlock, 1, 0),
-			"XXX",
-			"XXX",
-			"XXX",
-			'X', RandomUtilitiesMod.obsidianCrystal);
+				"XXX",
+				"XXX",
+				"XXX",
+				'X', RandomUtilitiesMod.obsidianCrystal);
 
 		GameRegistry.addShapelessRecipe(new ItemStack(RandomUtilitiesMod.obsidianCrystal,9,0),RandomUtilitiesMod.itemObsidianCrystalBlock);
+
+		GameRegistry.addShapelessRecipe(new ItemStack(RandomUtilitiesMod.glowsand,1,0),Blocks.SAND,Items.GLOWSTONE_DUST);
 	}
 
 

@@ -89,16 +89,16 @@ public class EntityCursedSnowball extends EntityMob implements IRangedAttackMob 
 
     @Override
     public void onLivingUpdate() {
-        if (this.worldObj.isRemote)
+        if (this.world.isRemote)
         {
             if (this.rand.nextInt(100) == 0 && !this.isSilent())
             {
-                this.worldObj.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, this.getSoundCategory(), (1.0F + this.rand.nextFloat())/4, this.rand.nextFloat() * 0.7F + 0.3F, false);
+                this.world.playSound(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, this.getSoundCategory(), (1.0F + this.rand.nextFloat())/4, this.rand.nextFloat() * 0.7F + 0.3F, false);
             }
 
             for (int i = 0; i < 2; ++i)
             {
-                this.worldObj.spawnParticle(EnumParticleTypes.SNOW_SHOVEL, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.getEyeHeight(), this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D, new int[0]);
+                this.world.spawnParticle(EnumParticleTypes.SNOW_SHOVEL, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.getEyeHeight(), this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D, new int[0]);
             }
         }
 
@@ -112,7 +112,7 @@ public class EntityCursedSnowball extends EntityMob implements IRangedAttackMob 
 
     @Override
     public boolean getCanSpawnHere() {
-        IBlockState spawnpos = this.worldObj.getBlockState((new BlockPos(this)));
+        IBlockState spawnpos = this.world.getBlockState((new BlockPos(this)));
         //RandomUtilitiesMod.logger.log(Level.INFO,String.format("%b %s",spawnpos.getMaterial().equals(Material.SNOW), spawnpos.getBlock().getLocalizedName()));
         return spawnpos.getMaterial().equals(Material.SNOW) && super.getCanSpawnHere();
     }
@@ -124,13 +124,13 @@ public class EntityCursedSnowball extends EntityMob implements IRangedAttackMob 
         double x = target.posX - this.posX;
         double y = d0 - this.posY - this.getEyeHeight();
         double z = target.posZ - this.posZ;
-        float f = MathHelper.sqrt_double(x * x + z * z) * 0.2F;
+        float f = MathHelper.sqrt(x * x + z * z) * 0.2F;
 
         if(this.rand.nextInt(10) != 0) {
-            EntityAttackSnoball entitysnowball = new EntityAttackSnoball(this.worldObj, this);
+            EntityAttackSnoball entitysnowball = new EntityAttackSnoball(this.world, this);
             entitysnowball.setThrowableHeading(x, y + (double) f, z, 1.6F, 5.0F);
             this.playSound(SoundEvents.ENTITY_SNOWMAN_SHOOT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
-            this.worldObj.spawnEntityInWorld(entitysnowball);
+            this.world.spawnEntity(entitysnowball);
         }
         else {
             this.playSound(SoundEvents.ENTITY_CHICKEN_HURT, 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));

@@ -395,16 +395,16 @@ public class GuiArmorstandPoser extends GuiScreen implements GuiPageButtonList.G
             String text = "";
             switch((id-SLIDER_HEAD_X)%3) {
                 case 0:
-                    text = "§cX";
+                    text = "\u00A7cX";
                     break;
                 case 1:
-                    text = "§aY";
+                    text = "\u00A7aY";
                     break;
                 case 2:
-                    text = "§bZ";
+                    text = "\u00A7bZ";
                     break;
             }
-            return String.format("%s: %5.3f§r",text,value);
+            return String.format("%s: %5.3f\u00A7r",text,value);
 
         }
         else if(id == SLIDER_ENTITY)

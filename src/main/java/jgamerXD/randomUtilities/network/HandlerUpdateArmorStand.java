@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class HandlerUpdateArmorStand implements IMessageHandler<PacketUpdateArmorStand, IMessage> {
     @Override
     public IMessage onMessage(PacketUpdateArmorStand message, MessageContext ctx) {
-        EntityArmorStand armorStand = (EntityArmorStand) RandomUtilitiesMod.proxy.getPlayerFromContext(ctx).worldObj.getEntityByID(message.entityID);
+        EntityArmorStand armorStand = (EntityArmorStand) RandomUtilitiesMod.proxy.getPlayerFromContext(ctx).world.getEntityByID(message.entityID);
         armorStand.rotationYaw = message.rotation;
         armorStand.setHeadRotation(message.head);
         armorStand.setBodyRotation(message.body);

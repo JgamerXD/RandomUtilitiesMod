@@ -1,6 +1,8 @@
 package jgamerXD.randomUtilities;
 
 
+import jgamerXD.randomUtilities.entity.EntityCursedSnowball;
+import jgamerXD.randomUtilities.entity.RenderCursedSnowball;
 import jgamerXD.randomUtilities.gui.GuiTest;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -12,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
@@ -27,6 +30,7 @@ public class ClientProxy extends CommonProxy
 		meshItem(mesher,RandomUtilitiesMod.silencer, 0);
 
 		meshItem(mesher,RandomUtilitiesMod.itemSugarblock,0);
+		meshItem(mesher,RandomUtilitiesMod.itemGlowsand,0);
 		meshItem(mesher,RandomUtilitiesMod.itemPoisonblock,0);
 		meshItem(mesher,RandomUtilitiesMod.itemFlintblock,0);
 		meshItem(mesher,RandomUtilitiesMod.itemObsidianCrystalBlock,0);
@@ -34,6 +38,11 @@ public class ClientProxy extends CommonProxy
 
 
 
+	}
+
+	@Override
+	public void registerRendering() {
+		RenderingRegistry.registerEntityRenderingHandler(EntityCursedSnowball.class, RenderCursedSnowball::new);
 	}
 
 	private void meshItem(ItemModelMesher mesher, Item item, int meta)

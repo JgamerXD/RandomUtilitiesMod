@@ -14,6 +14,7 @@ public class CommonProxy implements IGuiHandler
 {
 
 	public void loadModels(){}
+	public void registerRendering(){}
 
 	public EntityPlayer getPlayerFromContext(MessageContext ctx)
 	{

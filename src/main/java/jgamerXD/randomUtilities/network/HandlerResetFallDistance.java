@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class HandlerResetFallDistance implements IMessageHandler<PacketResetFallDistance, IMessage> {
     @Override
     public IMessage onMessage(PacketResetFallDistance message, MessageContext ctx) {
-        EntityLivingBase entity = (EntityLivingBase) RandomUtilitiesMod.proxy.getPlayerFromContext(ctx).worldObj.getEntityByID(message.entityID);
+        EntityLivingBase entity = (EntityLivingBase) RandomUtilitiesMod.proxy.getPlayerFromContext(ctx).world.getEntityByID(message.entityID);
         if(entity != null)
             entity.fallDistance = 1;
         return null;

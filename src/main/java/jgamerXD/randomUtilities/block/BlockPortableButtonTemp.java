@@ -1,6 +1,7 @@
 package jgamerXD.randomUtilities.block;
 
 import com.google.common.base.Predicate;
+import jgamerXD.randomUtilities.RandomUtilitiesMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockLever;
@@ -21,6 +22,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -41,8 +43,8 @@ public class BlockPortableButtonTemp extends BlockDirectional {
         this.setHardness(0F);
         this.setLightOpacity(0);
         this.setResistance(0.0F);
+        //this.setTickRandomly(true);
         this.disableStats();
-        this.translucent = true;
     }
 
 
@@ -106,22 +108,41 @@ public class BlockPortableButtonTemp extends BlockDirectional {
         return 20;
     }
 
+//    @Override
+//    public boolean requiresUpdates() {
+//        return true;
+//    }
+
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
-        //worldIn.notifyNeighborsOfStateChange(pos, this);
-        worldIn.notifyNeighborsOfStateChange(pos.offset(((EnumFacing) state.getProperties().get(FACING)).getOpposite()), this);
-        worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+        System.out.println("Block added");
+        System.out.println(worldIn.getWorldTime());
+        System.out.println(worldIn.isRemote);
+        if(!worldIn.isRemote) {
+            //worldIn.notifyNeighborsOfStateChange(pos, this);
+            worldIn.notifyNeighborsOfStateChange(pos.offset(((EnumFacing) state.getProperties().get(FACING)).getOpposite()), this);
+            worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+        }
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        System.out.println("Block broken");
+        System.out.println(worldIn.getWorldTime());
+        System.out.println(worldIn.isRemote);
         worldIn.notifyNeighborsOfStateChange(pos.offset(((EnumFacing) state.getProperties().get(FACING)).getOpposite()), this);
     }
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        worldIn.setBlockToAir(pos);
+        System.out.println("Update Tick");
+        System.out.println(worldIn.getWorldTime());
+        System.out.println(worldIn.isRemote);
+        if(!worldIn.isRemote)
+            worldIn.setBlockToAir(pos);
     }
+
+
 
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.

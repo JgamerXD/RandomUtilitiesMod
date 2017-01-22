@@ -22,7 +22,7 @@ public class ItemObsidianCrystal extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
         if(!worldIn.isRemote)
-            playerIn.addChatComponentMessage(new TextComponentTranslation("§11§22§33§44§55§66§77§88§99§00§aa§bb§cc§dd§ee§ff"));
+            playerIn.sendStatusMessage(new TextComponentTranslation("§11§22§33§44§55§66§77§88§99§00§aa§bb§cc§dd§ee§ff"));
         return ActionResult.newResult(EnumActionResult.SUCCESS,itemStackIn);
     }
 }
